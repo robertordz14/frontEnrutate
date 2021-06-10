@@ -1,11 +1,10 @@
 import './App.css';
-import SideBarMapRoutes from './components/common/SideBarMap/SideBarMap';
+import SideBarMapRoutes from './components/SideBarMap/SideBarMap';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
-import Botones from './components/common/Botones/Botones';
 
 function App() {
   return (
