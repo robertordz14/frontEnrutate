@@ -3,16 +3,25 @@
     width: 100%;
     object-fit: fill;
 }
+.MadalBa{
+    -webkit-border-radius: 10px !important;
+    -moz-border-radius: 10px !important;
+    border-radius: 10px !important; 
+} 
 
 @media only screen and (max-width: 600px){
     .MadalBa{
         margin-top: 20%;
         margin-bottom: 20%;
     }
+    .iconClose{
+        float: right;
+    }
 }
   
   @media only screen and (min-width: 700px){
     .iconClose{
         cursor: pointer;
+        float: right;
     }
   }

@@ -12,9 +12,9 @@ const MadalBanner = (props) => {
 
   return (
     <div>
-      <Modal isOpen={modal} toggle={toggle} classNames="MadalBa">
-        <ModalBody>
-        <CloseIcon onClick={toggle} className="iconClose" />
+      <Modal isOpen={modal} toggle={toggle} classNames="MadalBa" style={{top: '10%'}}>
+        <ModalBody style={{backgroundColor: '#FAB719'}}>
+        <CloseIcon onClick={toggle} className="iconClose" style={{backgroundColor: '#FAB719'}} />
         <img src={bannerEnrutate} alt="Banner" srcset="" className="bannerModal" />
         </ModalBody>
       </Modal>

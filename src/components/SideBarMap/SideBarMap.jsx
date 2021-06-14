@@ -127,7 +127,7 @@ getDirections = () => {
             image={logoEnrutate}
             imageName='logo'
             />
-            <div className="containerRutas">
+            <div className="containerRutas" >
               <h6> <b> RUTAS </b> </h6>
               {              
                 this.state.routes[0] ?
