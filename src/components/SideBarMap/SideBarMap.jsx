@@ -127,7 +127,6 @@ getDirections = () => {
             image={logoEnrutate}
             imageName='logo'
             />
-            
             <div className="containerRutas">
               <h6> <b> RUTAS </b> </h6>
               {              
