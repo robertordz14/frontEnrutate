@@ -130,7 +130,7 @@ getDirections = () => {
             <div className="containerRutas">
               <h6> <b> RUTAS </b> </h6>
               {              
-                this.state.routes[2] ?
+                this.state.routes[0] ?
                   this.state.routes.map((n) =>
                     <button
                       key={n.nombre}
