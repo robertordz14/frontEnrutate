@@ -12,13 +12,13 @@ const Botones = () => {
 
   return (
       <div className="containerBotones">
-        <a href="https://www.enrutate.info/" rel="noreferrer" target="_blank">
+        <a href="https://www.enrutate.info/" target="_blank" rel="noreferrer" >
           <img src={imgCamion} alt="" className="camion" />
         </a>
-        <a href="https://play.google.com/store/apps/details?id=com.esoftmovil.enrutate&hl=es_419" rel="noreferrer" target="_blank">
+        <a href="https://play.google.com/store/apps/details?id=com.esoftmovil.enrutate&hl=es_419" rel="noreferrer"  target="_blank">
           <img src={imgPlayStore} alt=""className="playStore" />
         </a>
-        <a href="https://apps.apple.com/mx/app/enrutate/id1087679011?l=es&ls=1"  rel="noreferrer" target="_blank">
+        <a href="https://apps.apple.com/mx/app/enrutate/id1087679011?l=es&ls=1" rel="noreferrer" target="_blank">
           <img src={imgAppleStore} alt="" className="appleStore" />
         </a>    
       </div>

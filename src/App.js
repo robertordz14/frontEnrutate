@@ -1,5 +1,6 @@
 import './App.css';
 import SideBarMapRoutes from './components/SideBarMap/SideBarMap';
+import MadalBanner from './components/Modal/Modal';
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,6 +18,9 @@ function App() {
                 return <SideBarMapRoutes id={match.params.id} />
               }}/>                                    
             </Switch>
+          </div>
+          <div className="Modal">
+            <MadalBanner />
           </div>
         </Router>
       </div>

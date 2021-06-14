@@ -13,12 +13,14 @@ import Botones from '../Botones/Botones';
 import 'react-sidebar-ui/dist/index.css';
 import './SideBarMap.css';
 
+
 export class SideBarMapRoutes extends Component {
   constructor(props) {
     super(props);    
     this.state = {     
       count: 0,
-      icon: 0,                               
+      icon: 0, 
+      statusAnimation: false,                              
       busStop: Number.parseInt(this.props.id),
       rutaID: null,
       polylineGreen: null,
@@ -29,7 +31,7 @@ export class SideBarMapRoutes extends Component {
       originLineTwo: { lat: 24.80661759339234, lng: -107.39118227883854 },
       destinationLineTwo: { lat: 21.884454222315508, lng: -102.3029899437197 },
       lineCoordinatesExample: [
-        { lat: 24.80661759339234, lng: -107.39118227883854 },
+        { lat: 21.921338304212593, lng: -102.29783418706253 },
         { lat: 21.884454222315508, lng: -102.3029899437197 },
         { lat: 21.884554222315508, lng: -102.3030899437197 },
         { lat: 21.884654222315508, lng: -102.3031899437197 },
@@ -41,15 +43,32 @@ export class SideBarMapRoutes extends Component {
     }; 
   }
 
+
   componentDidMount() {        
     this.methodGet();  
     this.getDirections(this.state.busStop);
   }
+  
+  // componentDidUpdate(){
+  //   if(this.state.statusAnimation === true){
+  //     var time = setInterval(() =>{            
+  //       if (this.state.icon === "100%") {      
+  //         clearInterval(time);                     
+  //         this.setState({ count: 0 });
+  //       }else{        
+  //         this.setState({ count: (this.state.count + 10) });
+  //         this.setState({ icon: (this.state.count + "%") });        
+  //         console.log(this.state.icon); 
+  //       }
+  //     },2000); 
+  //   }  } 
+
 
   methodGet = () => {    
     const url = `https://enrutate2021.herokuapp.com/api/data/${this.state.busStop}`
     axios.get(url).then(response => {                        
       this.setState({ routes: response.data });   
+      console.log(response)            
     });    
   }
 
@@ -59,16 +78,19 @@ export class SideBarMapRoutes extends Component {
       var endPoint = response.data.length;                           
       this.setState({polylineGreen: response.data});
       this.setState({originLineOne: response.data[0]});
-      this.setState({destinationLineOne: response.data[endPoint]});
-      this.componentDidMount();                              
-    });                        
+      this.setState({destinationLineOne: response.data[endPoint]});  
+      this.setState({ statusAnimation: true});
+      // this.componentDidUpdate();
+    });                      
 }
 
 methodLineEnd = (id) =>{        
     this.setState({ rutaID: id});
     const url = `https://enrutate2021.herokuapp.com/api/lineTwo/${id}`;
     axios.get(url).then(response => {              
-      var endPoint = response.data.length;                     
+      var endPoint = response.data.length;          
+      console.log(endPoint);
+      console.log(response);                 
       this.setState({polylineOrange: response.data});
       this.setState({originLineTwo: response.data[0]});
       this.setState({destinationLineTwo: response.data[endPoint]});
@@ -97,18 +119,6 @@ getDirections = () => {
     );
 };
 
-animation = () => {    
-  var time = setInterval(() =>{            
-    if (this.state.icon === "30%") {      
-      clearInterval(time);                     
-      this.setState({ count: 0 });
-    }else{        
-      this.setState({ count: (this.state.count + 5) });
-      this.setState({ icon: (this.state.count + "%") });        
-    }
-  },2000);     
-};
-
   render() {
     return (
       <div className="Side">
@@ -117,18 +127,19 @@ animation = () => {
             image={logoEnrutate}
             imageName='logo'
             />
-
+            
             <div className="containerRutas">
               <h6> <b> RUTAS </b> </h6>
               {              
-                this.state.routes[0] ?
+                this.state.routes[2] ?
                   this.state.routes.map((n) =>
                     <button
                       key={n.nombre}
                       className="btn"
-                      onClick={(e) => this.methodLineEnd(n.rutaID, e)} 
+                      onClick={(e) => this.methodLineEnd(n.rutaID, e)}
                     >
-                      Nombre: {n.nombre+ "\n" } <b>Frecuencia: </b> {n.frecuencia}
+                      Nombre: {n.nombre+ '\n'} <b>Frecuencia:</b> {n.frecuencia}
+                      
                     </button>
                   )
                 : "El código QR escaneado es incorrecto"
@@ -142,24 +153,25 @@ animation = () => {
           <div className="containerMap">
           <Map
             google={this.props.google}
-            zoom={14}
+            zoom={12}
             initialCenter={this.state.originLineOne ? this.state.originLineOne : this.state.originExample}
             center={this.state.originLineTwo ? this.state.originLineTwo : this.state.originExample}
           >
             <Marker 
               position={this.state.originLineOne ? this.state.originLineOne : this.state.originExample} 
-              icon={iconInicio}
-            />            
+              icon={iconFin}
+            />  
+            
             <Marker 
               position={this.state.originLineTwo ? this.state.originLineTwo : this.state.destinationExample} 
-              icon={iconFin} 
+              icon={iconInicio} 
             />            
 
             <Polyline
-              geodesic={true}
               path={
                 this.state.polylineGreen ? this.state.polylineGreen : this.state.routesExample
               }              
+              geodesic={true}
               strokeColor="#F68000"
               options={{
                 strokeOpacity: 2,
@@ -169,17 +181,18 @@ animation = () => {
                   icon: {
                     path: this.props.google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
                   },
-                  offset: '0',
-                  // repeat: "60px",
-                }]
+                  // position: this.state.icon,
+                  // offset: this.state.icon,
+                  repeat: '200px'
+                }],
               }}
             />
 
             <Polyline
-              geodesic={true}
               path={
                 this.state.polylineOrange ? this.state.polylineOrange : this.state.routesExample
-              }              
+              }         
+              geodesic={true}     
               strokeColor="green"
               options={{
                 strokeOpacity: 2,
@@ -189,8 +202,9 @@ animation = () => {
                   icon: {
                     path: this.props.google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
                   },
-                  offset: '0',
-                  // repeat: "60px",
+                  // position: this.state.icon,
+                  // offset: this.state.icon,
+                   repeat: '200px'
                 }]
               }}
             />
