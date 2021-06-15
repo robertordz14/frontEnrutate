@@ -7,6 +7,7 @@ import { Nav } from 'reactstrap';
 
 import logoEnrutate from '../../assets/img/enrutate.png';
 import iconInicio from '../../assets/img/iconInicio.png';
+import iconPerson from '../../assets/img/iconPerson.png'
 import iconFin from '../../assets/img/iconFin.png';
 import Botones from '../Botones/Botones';
 
@@ -20,15 +21,20 @@ export class SideBarMapRoutes extends Component {
     this.state = {     
       count: 0,
       icon: 0, 
+
+      ///////////////////      ///////////////////      ///////////////////
+      markerParada:{},
+     ///////////////////      ///////////////////      ///////////////////
+
       statusAnimation: false,                              
       busStop: Number.parseInt(this.props.id),
       rutaID: null,
       polylineGreen: null,
       polylineOrange: null,
       routes: [],
-      originLineOne: { lat: 24.80661759339234, lng:  -107.39118227883854 },
+      originLineOne: {},
       destinationLineOne: { lat: 21.884454222315508, lng: -102.3029899437197 },
-      originLineTwo: { lat: 24.80661759339234, lng: -107.39118227883854 },
+      originLineTwo: {},
       destinationLineTwo: { lat: 21.884454222315508, lng: -102.3029899437197 },
       lineCoordinatesExample: [
         { lat: 21.921338304212593, lng: -102.29783418706253 },
@@ -37,7 +43,7 @@ export class SideBarMapRoutes extends Component {
         { lat: 21.884654222315508, lng: -102.3031899437197 },
         { lat: 21.884754222315508, lng: -102.3032899437197 },
       ],
-      originExample: { lat: 24.80661759339234, lng: -107.39118227883854 },
+      originExample: {},
       destinationExample: { lat: 21.884454222315508, lng: -102.3029899437197 },
       routesExample: []
     }; 
@@ -46,6 +52,12 @@ export class SideBarMapRoutes extends Component {
 
   componentDidMount() {        
     this.methodGet();  
+      ///////////////////      ///////////////////      ///////////////////
+
+    this.paradaGet();
+
+      ///////////////////      ///////////////////      ///////////////////
+
     this.getDirections(this.state.busStop);
   }
   
@@ -71,6 +83,16 @@ export class SideBarMapRoutes extends Component {
       console.log(response)            
     });    
   }
+
+      ///////////////////      ///////////////////      ///////////////////
+  paradaGet = () => {    
+    const url = `https://enrutate2021.herokuapp.com/api/parada/${this.state.busStop}`
+    axios.get(url).then(response => {      
+      this.setState({markerParada: response.data[0]});                  
+      console.log(response.data)            
+    });    
+  }
+      ///////////////////      ///////////////////      ///////////////////
 
   methodLineStart = () =>{        
     const url = `https://enrutate2021.herokuapp.com/api/lineOne/${this.state.rutaID}`;
@@ -128,7 +150,7 @@ getDirections = () => {
             imageName='logo'
             />
             <div className="containerRutas" >
-              <h6> <b> RUTAS </b> </h6>
+              <h6> <b> RUTAS CERCANAS </b> </h6>
               {              
                 this.state.routes[0] ?
                   this.state.routes.map((n) =>
@@ -152,26 +174,38 @@ getDirections = () => {
           <div className="containerMap">
           <Map
             google={this.props.google}
-            zoom={12}
-            initialCenter={this.state.originLineOne ? this.state.originLineOne : this.state.originExample}
-            center={this.state.originLineTwo ? this.state.originLineTwo : this.state.originExample}
+            zoom={16}
+            center={this.state.markerParada}
+            mapTypeControl= {false}
+            // streetViewControl={false}
+            // disableDefaultUI= {true}
+            initialCenter={this.state.originLineOne ? this.state.originLineOne : this.state.markerParada}
+            // center={this.state.originLineTwo ? this.state.originLineTwo : this.state.originExample}
           >
             <Marker 
-              position={this.state.originLineOne ? this.state.originLineOne : this.state.originExample} 
+              position={this.state.originLineOne ? this.state.originLineOne : this.state.markerParada} 
               icon={iconFin}
             />  
             
             <Marker 
-              position={this.state.originLineTwo ? this.state.originLineTwo : this.state.destinationExample} 
+              position={this.state.originLineTwo ? this.state.originLineTwo : this.state.markerParada} 
               icon={iconInicio} 
             />            
 
+{/* ///////////////////      ///////////////////      /////////////////// */}
+            <Marker 
+              position={this.state.markerParada} 
+              icon={iconPerson} 
+              // label= "Aqui estas"
+            />    
+{/* ///////////////////      ///////////////////      /////////////////// */}
+            
             <Polyline
               path={
                 this.state.polylineGreen ? this.state.polylineGreen : this.state.routesExample
               }              
               geodesic={true}
-              strokeColor="#F68000"
+              strokeColor="#349dd9"
               options={{
                 strokeOpacity: 2,
                 strokeWeight: 4,
