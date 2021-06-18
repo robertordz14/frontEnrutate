@@ -7,25 +7,21 @@ import { Nav } from 'reactstrap';
 
 import logoEnrutate from '../../assets/img/enrutate.png';
 import iconInicio from '../../assets/img/iconInicio.png';
-import iconPerson from '../../assets/img/iconPerson.png'
+import iconLocation from '../../assets/img/iconLocation.png';
 import iconFin from '../../assets/img/iconFin.png';
 import Botones from '../Botones/Botones';
 
 import 'react-sidebar-ui/dist/index.css';
 import './SideBarMap.css';
 
-
 export class SideBarMapRoutes extends Component {
   constructor(props) {
     super(props);    
-    this.state = {     
-      count: 0,
-      icon: 0, 
-
-      ///////////////////      ///////////////////      ///////////////////
+    this.state = { 
+      progress: [],    
+      count: null,
+      icon: "Mapa",
       markerParada:{},
-     ///////////////////      ///////////////////      ///////////////////
-
       statusAnimation: false,                              
       busStop: Number.parseInt(this.props.id),
       rutaID: null,
@@ -49,18 +45,26 @@ export class SideBarMapRoutes extends Component {
     }; 
   }
 
-
-  componentDidMount() {        
+  componentDidMount = () => {
     this.methodGet();  
-      ///////////////////      ///////////////////      ///////////////////
-
     this.paradaGet();
-
-      ///////////////////      ///////////////////      ///////////////////
-
     this.getDirections(this.state.busStop);
-  }
-  
+      this.methodGet(); 
+      console.log(this.props.id);           
+      setInterval(() => {            
+          if (this.state.count === 100) {                
+              this.setState({ 
+                  count: 0,                 
+              });        
+          }else{
+              this.setState({
+                  count: this.state.count + 0.5,
+                  icon: this.state.count + "%",
+              });
+          }
+      }, 50);
+    };
+    
   // componentDidUpdate(){
   //   if(this.state.statusAnimation === true){
   //     var time = setInterval(() =>{            
@@ -84,25 +88,22 @@ export class SideBarMapRoutes extends Component {
     });    
   }
 
-      ///////////////////      ///////////////////      ///////////////////
   paradaGet = () => {    
     const url = `https://enrutate2021.herokuapp.com/api/parada/${this.state.busStop}`
     axios.get(url).then(response => {      
       this.setState({markerParada: response.data[0]});                  
-      console.log(response.data)            
     });    
   }
-      ///////////////////      ///////////////////      ///////////////////
 
   methodLineStart = () =>{        
     const url = `https://enrutate2021.herokuapp.com/api/lineOne/${this.state.rutaID}`;
     axios.get(url).then(response => {          
       var endPoint = response.data.length;                           
-      this.setState({polylineGreen: response.data});
-      this.setState({originLineOne: response.data[0]});
-      this.setState({destinationLineOne: response.data[endPoint]});  
-      this.setState({ statusAnimation: true});
-      // this.componentDidUpdate();
+      this.setState({polylineGreen: response.data,
+        originLineOne: response.data[0],
+        destinationLineOne: response.data[endPoint],
+        statusAnimation: true
+      });
     });                      
 }
 
@@ -113,9 +114,12 @@ methodLineEnd = (id) =>{
       var endPoint = response.data.length;          
       console.log(endPoint);
       console.log(response);                 
-      this.setState({polylineOrange: response.data});
-      this.setState({originLineTwo: response.data[0]});
-      this.setState({destinationLineTwo: response.data[endPoint]});
+      this.setState({polylineOrange: response.data,
+        originLineTwo: response.data[0],
+        destinationLineTwo: response.data[endPoint],
+        statusAnimation: true,
+        count: 0
+      });
       this.methodLineStart();                                         
     });               
 }  
@@ -174,82 +178,73 @@ getDirections = () => {
           <div className="containerMap">
           <Map
             google={this.props.google}
-            zoom={16}
+            zoom={15}
             center={this.state.markerParada}
-            mapTypeControl= {false}
-            // streetViewControl={false}
-            // disableDefaultUI= {true}
-            initialCenter={this.state.originLineOne ? this.state.originLineOne : this.state.markerParada}
-            // center={this.state.originLineTwo ? this.state.originLineTwo : this.state.originExample}
+            mapTypeControl={false}
           >
             <Marker 
               position={this.state.originLineOne ? this.state.originLineOne : this.state.markerParada} 
-              icon={iconFin}
+              icon={iconInicio}
             />  
-            
             <Marker 
               position={this.state.originLineTwo ? this.state.originLineTwo : this.state.markerParada} 
-              icon={iconInicio} 
+              icon={iconFin} 
             />            
-
-{/* ///////////////////      ///////////////////      /////////////////// */}
             <Marker 
               position={this.state.markerParada} 
-              icon={iconPerson} 
-              // label= "Aqui estas"
+              icon={iconLocation} 
             />    
-{/* ///////////////////      ///////////////////      /////////////////// */}
-            
             <Polyline
-              path={
-                this.state.polylineGreen ? this.state.polylineGreen : this.state.routesExample
-              }              
               geodesic={true}
-              strokeColor="#349dd9"
+              path={
+                this.state.polylineGreen ? this.state.polylineGreen : []
+              }              
               options={{
                 strokeOpacity: 2,
                 strokeWeight: 4,
                 fillOpacity: 10,
+                strokeColor:"#349dd9",
                 icons:[{
                   icon: {
                     path: this.props.google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
                   },
-                  // position: this.state.icon,
-                  // offset: this.state.icon,
-                  repeat: '200px'
+                  offset: this.state.icon,
+                  repeat: "200px",
                 }],
               }}
             />
-
             <Polyline
+            geodesic={true}     
               path={
-                this.state.polylineOrange ? this.state.polylineOrange : this.state.routesExample
-              }         
-              geodesic={true}     
-              strokeColor="green"
+                this.state.polylineOrange ? this.state.polylineOrange : []
+              }  
+              interval={10}       
               options={{
                 strokeOpacity: 2,
                 strokeWeight: 4,
                 fillOpacity: 10,
+                strokeColor:"green",
+                icon: 'M -2,-2 2,2 M 2,-2 -2,2',
+                repeat: "200px",
                 icons:[{
                   icon: {
                     path: this.props.google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
                   },
-                  // position: this.state.icon,
-                  // offset: this.state.icon,
-                   repeat: '200px'
+                  offset: this.state.icon,
                 }]
               }}
             />
           </Map>
         </div>
         
+        <footer className="containerB2">
+              <Botones />
+        </footer>
       </div>
 
       );
     }
 }
-
 
 export default GoogleApiWrapper({
   apiKey: ('AIzaSyAfb3MRYco1aN4yaJyXmK8jperHTMJl07E')

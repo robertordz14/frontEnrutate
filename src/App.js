@@ -1,6 +1,6 @@
 import './App.css';
 import SideBarMapRoutes from './components/SideBarMap/SideBarMap';
-import MadalBanner from './components/Modal/Modal';
+import MadalBanner from './components/ModalBanner/ModalBanner';
 import {
   BrowserRouter as Router,
   Switch,

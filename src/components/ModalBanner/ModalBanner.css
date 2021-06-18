@@ -1,0 +1,68 @@
+.bannerModal{
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+}
+.camionEnru{
+    width: auto;
+    object-fit: fill;
+    height: 40px;
+    margin: 0;
+    animation-timing-function: ease;
+    position: relative;
+    animation: timingChange 5s infinite;
+}
+/*  Smartphones Potrait*/
+@media only screen and (max-width: 699px) and (max-height: 1024px) and (orientation:portrait){
+    .MadalBa{
+        margin-top: 20%;
+        margin-bottom: 20%;
+    }
+    .iconClose{
+        float: right;
+    }
+}
+/*  Smartphones landscape*/
+@media only screen and (min-width: 321px) and (max-width: 1024px) and (max-height: 699px) and (orientation:landscape){
+    .MadalBa{
+        margin-top: 20%;
+        margin-bottom: 20%;
+    }
+    .iconClose{
+        float: right;
+    }
+}
+/* Desktop */
+@media only screen and (min-width: 961px)and (orientation:landscape){
+    .iconClose{
+        cursor: pointer;
+        float: right;
+    }
+}
+/* iPads Landscape*/
+@media only screen and (min-width: 768px) and (max-width:1024px) and (max-height:1024px)  and (min-height: 768px) and (orientation:landscape) {
+    .iconClose{
+        cursor: pointer;
+        float: right;
+    }
+}
+/* iPads Potrait*/
+@media only screen and (min-width: 768px) and (max-width:1366px) and (max-height:1400px) and (min-height:1024px) and (orientation:portrait) {
+    .MadalBa{
+        margin-top: 20%;
+        margin-bottom: 20%;
+    }
+    .iconClose{
+        float: right;
+    }
+}
+
+/* Animaciones */
+@keyframes timingChange {
+    from{
+        left: 0%;
+    }
+    to{
+        left: 80%;
+    }
+}
