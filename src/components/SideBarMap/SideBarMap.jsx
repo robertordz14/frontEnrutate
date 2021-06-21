@@ -159,7 +159,7 @@ getDirections = () => {
                       <UncontrolledCollapse toggler="#toggler" className="btn">
                         <Card>
                           <CardBody>
-                              <small>{n.nombre}, {n.frecuencia}, {n.inicio}, {n.fin}</small>
+                              <small>Nombre: {n.nombre+`\n`} Frecuencia: {n.frecuencia+`\n`} Inicio: {n.inicio+`\n`} Fin: {n.fin+`\n`}</small>
                           </CardBody>
                         </Card>
                       </UncontrolledCollapse>
