@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { Map, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react';
+// import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+// import CloseIcon from '@material-ui/icons/Close';
+import { UncontrolledCollapse, CardBody, Card } from 'reactstrap';
+// import { List } from 'reactstrap';
 import axios from "axios";
 
 import { Logo } from 'react-sidebar-ui';
@@ -9,6 +13,7 @@ import logoEnrutate from '../../assets/img/enrutate.png';
 import iconInicio from '../../assets/img/iconInicio.png';
 import iconLocation from '../../assets/img/iconLocation.png';
 import iconFin from '../../assets/img/iconFin.png';
+
 import Botones from '../Botones/Botones';
 
 import 'react-sidebar-ui/dist/index.css';
@@ -28,6 +33,7 @@ export class SideBarMapRoutes extends Component {
       polylineGreen: null,
       polylineOrange: null,
       routes: [],
+      dataRuta: [],
       originLineOne: {},
       destinationLineOne: { lat: 21.884454222315508, lng: -102.3029899437197 },
       originLineTwo: {},
@@ -44,7 +50,6 @@ export class SideBarMapRoutes extends Component {
       routesExample: []
     }; 
   }
-
   componentDidMount = () => {
     this.methodGet();  
     this.paradaGet();
@@ -64,34 +69,18 @@ export class SideBarMapRoutes extends Component {
           }
       }, 50);
     };
-    
-  // componentDidUpdate(){
-  //   if(this.state.statusAnimation === true){
-  //     var time = setInterval(() =>{            
-  //       if (this.state.icon === "100%") {      
-  //         clearInterval(time);                     
-  //         this.setState({ count: 0 });
-  //       }else{        
-  //         this.setState({ count: (this.state.count + 10) });
-  //         this.setState({ icon: (this.state.count + "%") });        
-  //         console.log(this.state.icon); 
-  //       }
-  //     },2000); 
-  //   }  } 
-
 
   methodGet = () => {    
     const url = `https://enrutate2021.herokuapp.com/api/data/${this.state.busStop}`
     axios.get(url).then(response => {                        
       this.setState({ routes: response.data });   
-      console.log(response)            
     });    
   }
 
   paradaGet = () => {    
     const url = `https://enrutate2021.herokuapp.com/api/parada/${this.state.busStop}`
     axios.get(url).then(response => {      
-      this.setState({markerParada: response.data[0]});                  
+      this.setState({markerParada: response.data[0] });        
     });    
   }
 
@@ -102,7 +91,7 @@ export class SideBarMapRoutes extends Component {
       this.setState({polylineGreen: response.data,
         originLineOne: response.data[0],
         destinationLineOne: response.data[endPoint],
-        statusAnimation: true
+        statusAnimation: true,
       });
     });                      
 }
@@ -113,14 +102,16 @@ methodLineEnd = (id) =>{
     axios.get(url).then(response => {              
       var endPoint = response.data.length;          
       console.log(endPoint);
-      console.log(response);                 
+      console.log(response);  
       this.setState({polylineOrange: response.data,
         originLineTwo: response.data[0],
         destinationLineTwo: response.data[endPoint],
         statusAnimation: true,
-        count: 0
+        count: 0,
+        markerParada: this.state.markerParada,
       });
-      this.methodLineStart();                                         
+      this.methodLineStart();    
+      this.paradaGet();                                     
     });               
 }  
 
@@ -163,12 +154,19 @@ getDirections = () => {
                       className="btn"
                       onClick={(e) => this.methodLineEnd(n.rutaID, e)}
                     >
-                      Nombre: {n.nombre+ '\n'} <b>Frecuencia:</b> {n.frecuencia}
-                      
+                      {n.nombre+ '\n'}
+                      <button className="btnInfo" id="toggler" key={n.nombre}> <small>Más información</small> </button>
+                      <UncontrolledCollapse toggler="#toggler" className="btn">
+                        <Card>
+                          <CardBody>
+                              <small>{n.nombre}, {n.frecuencia}, {n.inicio}, {n.fin}</small>
+                          </CardBody>
+                        </Card>
+                      </UncontrolledCollapse>
                     </button>
                   )
                 : "El código QR escaneado es incorrecto"
-              }    
+              }   
             </div>
             <footer className="containerB">
               <Botones />
@@ -179,7 +177,8 @@ getDirections = () => {
           <Map
             google={this.props.google}
             zoom={15}
-            center={this.state.markerParada}
+            center={this.state.markerParada ? this.state.markerParada : []}
+            initialCenter={this.state.originLineOne ? this.state.originLineOne : []} 
             mapTypeControl={false}
           >
             <Marker 

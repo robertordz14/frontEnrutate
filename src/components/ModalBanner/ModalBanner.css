@@ -12,6 +12,31 @@
     position: relative;
     animation: timingChange 5s infinite;
 }
+.containerBotones{
+    display: inline-block;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    margin: auto;
+    text-align: center;
+}
+.containerBotones>a{
+    position: flex;
+    margin: auto;
+}
+.camion{
+    width: auto;
+    height: 40px;
+}
+.playStore{
+    width: auto;
+    height: 30px;
+}
+.appleStore{
+    width: auto;
+    height: 25px;
+}
 /*  Smartphones Potrait*/
 @media only screen and (max-width: 699px) and (max-height: 1024px) and (orientation:portrait){
     .MadalBa{
@@ -24,10 +49,6 @@
 }
 /*  Smartphones landscape*/
 @media only screen and (min-width: 321px) and (max-width: 1024px) and (max-height: 699px) and (orientation:landscape){
-    .MadalBa{
-        margin-top: 20%;
-        margin-bottom: 20%;
-    }
     .iconClose{
         float: right;
     }

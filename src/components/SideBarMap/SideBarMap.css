@@ -1,3 +1,16 @@
+.btnInfo{
+  border-radius: 22%;
+  background-color: #f5c24be7;
+  border: rgb(124, 124, 124) .5px solid;
+}
+.btnInfo:hover{
+  border-radius: 22%;
+  background-color: #FAB719;
+  border: rgb(124, 124, 124) .5px solid;
+}
+.iconClose{
+  cursor: pointer;
+}
 /*  Smartphones Potrait*/
 @media only screen and (max-width: 699px) and (max-height: 1024px) and (orientation:portrait){
   .Side>.nav{     
@@ -145,10 +158,11 @@
     width: 100%;
   }
   .containerMap > div{
-    width: 80% !important; 
+    width: 90% !important; 
     height: 80% !important; 
-    margin-right: 10%;
-    margin-left: 10%;
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-bottom: 5%;
   }
   .wrap-collabsible {
     margin: 1.2rem 0; 
@@ -219,7 +233,7 @@
     display: none;
   }
   .containerB2{
-    top: 210%;
+    top: 185%;
     position: absolute;
     width: 100%;
     bottom: 0;
