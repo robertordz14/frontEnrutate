@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Map, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react';
-// import { Modal, ModalHeader, ModalBody } from 'reactstrap';
-// import CloseIcon from '@material-ui/icons/Close';
-import { UncontrolledCollapse, CardBody, Card } from 'reactstrap';
-// import { List } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+import CloseIcon from '@material-ui/icons/Close';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import camionEnrutateLateral from '../../assets/img/enrutateCamionLateral.png';
 import axios from "axios";
 
 import { Logo } from 'react-sidebar-ui';
@@ -23,6 +23,7 @@ export class SideBarMapRoutes extends Component {
   constructor(props) {
     super(props);    
     this.state = { 
+      modalInfo: false,
       progress: [],    
       count: null,
       icon: "Mapa",
@@ -33,7 +34,7 @@ export class SideBarMapRoutes extends Component {
       polylineGreen: null,
       polylineOrange: null,
       routes: [],
-      dataRuta: [],
+      dataRuta: null,
       originLineOne: {},
       destinationLineOne: { lat: 21.884454222315508, lng: -102.3029899437197 },
       originLineTwo: {},
@@ -50,12 +51,21 @@ export class SideBarMapRoutes extends Component {
       routesExample: []
     }; 
   }
+
+  toggle = () => {
+    if(this.state.modalInfo===true){
+      this.setState({modalInfo2:true})
+    }
+  }
+  toogle2 = () =>{
+    this.setState({modalInfo: false})
+    this.setState({modalInfo2: false})
+  }
+  
   componentDidMount = () => {
     this.methodGet();  
     this.paradaGet();
-    this.getDirections(this.state.busStop);
       this.methodGet(); 
-      console.log(this.props.id);           
       setInterval(() => {            
           if (this.state.count === 100) {                
               this.setState({ 
@@ -83,7 +93,6 @@ export class SideBarMapRoutes extends Component {
       this.setState({markerParada: response.data[0] });        
     });    
   }
-
   methodLineStart = () =>{        
     const url = `https://enrutate2021.herokuapp.com/api/lineOne/${this.state.rutaID}`;
     axios.get(url).then(response => {          
@@ -99,42 +108,26 @@ export class SideBarMapRoutes extends Component {
 methodLineEnd = (id) =>{        
     this.setState({ rutaID: id});
     const url = `https://enrutate2021.herokuapp.com/api/lineTwo/${id}`;
+    const url2 = `https://enrutate2021.herokuapp.com/api/modal/${id}`;
+    axios.get(url2).then(response => {
+      this.setState({
+        dataRuta: response.data
+      })
+    });
     axios.get(url).then(response => {              
       var endPoint = response.data.length;          
-      console.log(endPoint);
-      console.log(response);  
       this.setState({polylineOrange: response.data,
         originLineTwo: response.data[0],
         destinationLineTwo: response.data[endPoint],
         statusAnimation: true,
         count: 0,
         markerParada: this.state.markerParada,
+        modalInfo: true,
       });
       this.methodLineStart();    
-      this.paradaGet();                                     
-    });               
+      this.paradaGet(); 
+    });
 }  
-
-getDirections = () => {
-    const DirectionsService = new this.props.google.maps.DirectionsService();
-    DirectionsService.route(
-      {
-        origin: this.state.originExample,
-        destination: this.state.destinationExample,
-        travelMode: this.props.google.maps.TravelMode.DRIVING,
-        optimizeWaypoints: true,          
-      },
-      (result, status) => {
-        if (status === this.props.google.maps.DirectionsStatus.OK) {
-          this.setState({
-            coors: result.routes[0].overview_path,
-          });                     
-        } else {
-          console.error(`error fetching directions ${result}`);
-        }
-      }
-    );
-};
 
   render() {
     return (
@@ -155,38 +148,45 @@ getDirections = () => {
                       onClick={(e) => this.methodLineEnd(n.rutaID, e)}
                     >
                       {n.nombre+ '\n'}
-                      <button className="btnInfo" id="toggler" key={n.nombre}> <small>Más información</small> </button>
-                      <UncontrolledCollapse toggler="#toggler" className="btn">
-                        <Card>
-                          <CardBody>
-                              <small>Nombre: {n.nombre+`\n`} Frecuencia: {n.frecuencia+`\n`} Inicio: {n.inicio+`\n`} Fin: {n.fin+`\n`}</small>
-                          </CardBody>
-                        </Card>
-                      </UncontrolledCollapse>
+                      <button className="btnInfo" onClick={this.toggle}><AddCircleIcon className="btnMoreInfo" /></button>
                     </button>
                   )
                 : "El código QR escaneado es incorrecto"
               }   
+              
             </div>
             <footer className="containerB">
               <Botones />
             </footer>
           </Nav>
+          <Modal isOpen={this.state.modalInfo2} className="ModalInfo" >
+          <CloseIcon onClick={this.toogle2} className="iconCloseM" />
+            <ModalHeader className="HeaderModal">
+              <small>{this.state.dataRuta ? this.state.dataRuta[0].nombre : ""}</small>
+            </ModalHeader>
+            <ModalBody className="modalBody">
+                <p><b>Frecuencia: </b>{this.state.dataRuta ? this.state.dataRuta[0].frecuencia : ""}</p>
+                <p><b>Inicio: </b>{this.state.dataRuta ? this.state.dataRuta[0].inicio : ""}</p>
+                <p><b>Fin: </b>{this.state.dataRuta ? this.state.dataRuta[0].fin : ""}</p>
+                <p><b>Duracion: </b>{this.state.dataRuta ? this.state.dataRuta[0].duracion : ""}</p>
+                <img src={camionEnrutateLateral} alt="Enrutate" srcSet=""  className="camionEnru" />
+            </ModalBody>
+          </Modal>
 
           <div className="containerMap">
           <Map
             google={this.props.google}
             zoom={15}
             center={this.state.markerParada ? this.state.markerParada : []}
-            initialCenter={this.state.originLineOne ? this.state.originLineOne : []} 
+            //initialCenter={this.state.originLineOne ? this.state.originLineOne : []} 
             mapTypeControl={false}
           >
             <Marker 
-              position={this.state.originLineOne ? this.state.originLineOne : this.state.markerParada} 
+              position={this.state.originLineOne ? this.state.originLineOne : []} 
               icon={iconInicio}
             />  
             <Marker 
-              position={this.state.originLineTwo ? this.state.originLineTwo : this.state.markerParada} 
+              position={this.state.originLineTwo ? this.state.originLineTwo : []} 
               icon={iconFin} 
             />            
             <Marker 
@@ -207,7 +207,7 @@ getDirections = () => {
                   icon: {
                     path: this.props.google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
                   },
-                  offset: this.state.icon,
+                  //offset: this.state.icon,
                   repeat: "200px",
                 }],
               }}
@@ -229,7 +229,7 @@ getDirections = () => {
                   icon: {
                     path: this.props.google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
                   },
-                  offset: this.state.icon,
+                  //offset: this.state.icon,
                 }]
               }}
             />

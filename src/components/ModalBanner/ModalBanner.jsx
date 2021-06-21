@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, ModalBody } from 'reactstrap';
 import CloseIcon from '@material-ui/icons/Close';
 import bannerEnrutate from '../../assets/img/bannerEnru.png';
-import camionEnrutateLateralfrom from '../../assets/img/enrutateCamionLateral.png';
+import camionEnrutateLateral from '../../assets/img/enrutateCamionLateral.png';
 import imgPlayStore from '../../assets/img/googlePlay.png';
 import imgAppleStore from '../../assets/img/appStore.png';
 import './ModalBanner.css';
@@ -26,7 +26,7 @@ const MadalBanner = (props) => {
             <img src={imgAppleStore} alt="" className="appleStore" />
           </a>    
         </div>
-        <img src={camionEnrutateLateralfrom} alt="Enrutate" srcSet=""  className="camionEnru" />
+        <img src={camionEnrutateLateral} alt="Enrutate" srcSet=""  className="camionEnru" />
         </ModalBody>
       </Modal>
     </div>
