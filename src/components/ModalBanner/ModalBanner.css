@@ -42,6 +42,9 @@
     .MadalBa{
         margin-top: 20%;
         margin-bottom: 20%;
+        width: 80% !important;
+        margin-left: 10%;
+        margin-right: 10%;
     }
     .iconClose{
         float: right;

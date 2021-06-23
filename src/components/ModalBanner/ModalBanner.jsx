@@ -7,7 +7,7 @@ import imgPlayStore from '../../assets/img/googlePlay.png';
 import imgAppleStore from '../../assets/img/appStore.png';
 import './ModalBanner.css';
 
-const MadalBanner = (props) => {
+const ModalBanner = (props) => {
 
   const [modal, setModal] = useState(true);
   const toggle = () => setModal(!modal);
@@ -33,4 +33,4 @@ const MadalBanner = (props) => {
   );
 }
 
-export default MadalBanner;
+export default ModalBanner;

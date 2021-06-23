@@ -1,6 +1,6 @@
 import './App.css';
 import SideBarMapRoutes from './components/SideBarMap/SideBarMap';
-import MadalBanner from './components/ModalBanner/ModalBanner';
+import ModalBanner from './components/ModalBanner/ModalBanner';
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,7 +20,7 @@ function App() {
             </Switch>
           </div>
           <div className="Modal">
-            <MadalBanner />
+            <ModalBanner />
           </div>
         </Router>
       </div>

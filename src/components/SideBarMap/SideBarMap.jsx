@@ -2,17 +2,20 @@ import React, { Component } from 'react';
 import { Map, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import CloseIcon from '@material-ui/icons/Close';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import camionEnrutateLateral from '../../assets/img/enrutateCamionLateral.png';
+// import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import DehazeIcon from '@material-ui/icons/Dehaze';
+
 import axios from "axios";
 
 import { Logo } from 'react-sidebar-ui';
-import { Nav } from 'reactstrap';
+import {Navbar, Nav } from 'reactstrap';
 
 import logoEnrutate from '../../assets/img/enrutate.png';
 import iconInicio from '../../assets/img/iconInicio.png';
 import iconLocation from '../../assets/img/iconLocation.png';
 import iconFin from '../../assets/img/iconFin.png';
+import camionEnrutateLateral from '../../assets/img/enrutateCamionLateral.png';
+import smileEnrutate from '../../assets/img/smileEnrutate.png'
 
 import Botones from '../Botones/Botones';
 
@@ -24,6 +27,7 @@ export class SideBarMapRoutes extends Component {
     super(props);    
     this.state = { 
       modalInfo: false,
+      modalSide: false,
       progress: [],    
       count: null,
       icon: "Mapa",
@@ -53,15 +57,16 @@ export class SideBarMapRoutes extends Component {
   }
 
   toggle = () => {
-    if(this.state.modalInfo===true){
-      this.setState({modalInfo2:true})
-    }
+    this.setState({modalInfo:false})
   }
-  toogle2 = () =>{
-    this.setState({modalInfo: false})
-    this.setState({modalInfo2: false})
-  }
-  
+
+  toggleSide= () => {
+    this.setState({modalSide:true})
+  } 
+  toggleSide2 = () => {
+  this.setState({modalSide:false})
+  } 
+
   componentDidMount = () => {
     this.methodGet();  
     this.paradaGet();
@@ -123,6 +128,7 @@ methodLineEnd = (id) =>{
         count: 0,
         markerParada: this.state.markerParada,
         modalInfo: true,
+        modalSide: false
       });
       this.methodLineStart();    
       this.paradaGet(); 
@@ -132,7 +138,7 @@ methodLineEnd = (id) =>{
   render() {
     return (
       <div className="Side">
-         <Nav vertical>
+         <Nav vertical className="navNoSm">
             <Logo
             image={logoEnrutate}
             imageName='logo'
@@ -148,7 +154,6 @@ methodLineEnd = (id) =>{
                       onClick={(e) => this.methodLineEnd(n.rutaID, e)}
                     >
                       {n.nombre+ '\n'}
-                      <button className="btnInfo" onClick={this.toggle}><AddCircleIcon className="btnMoreInfo" /></button>
                     </button>
                   )
                 : "El código QR escaneado es incorrecto"
@@ -159,8 +164,44 @@ methodLineEnd = (id) =>{
               <Botones />
             </footer>
           </Nav>
-          <Modal isOpen={this.state.modalInfo2} className="ModalInfo" >
-          <CloseIcon onClick={this.toogle2} className="iconCloseM" />
+
+          <Navbar color="faded" light className="navSm">
+          <DehazeIcon className="iconSideRoutes" onClick={this.toggleSide} />
+           <img src={smileEnrutate} alt="Enrutate" srcSet=""  className="smileEnru" />
+          </Navbar>
+
+          <Modal isOpen={this.state.modalSide} toggle={this.toggleSide2} className="ModalSide" >
+          {/* <ArrowForwardIosIcon onClick={this.toggleSide2} className="iconCloseM" /> */}
+                <Nav vertical className="navSmSide">
+                  <Logo
+                  image={logoEnrutate}
+                  imageName='logo'
+                  className='logoEnruSide'
+                  />
+                  <div className="containerRutasSm" >
+                    <h6> <b> RUTAS CERCANAS </b> </h6>
+                    {              
+                      this.state.routes[0] ?
+                        this.state.routes.map((n) =>
+                          <button
+                            key={n.nombre}
+                            className="btn"
+                            onClick={(e) => this.methodLineEnd(n.rutaID, e)}
+                          >
+                            {n.nombre+ '\n'}
+                          </button>
+                        )
+                      : "El código QR escaneado es incorrecto"
+                    }   
+                  </div>
+                  <footer className="containerB">
+                    <Botones />
+                  </footer>
+                </Nav>
+          </Modal>
+
+          <Modal isOpen={this.state.modalInfo} toggle={this.toggle} className="ModalInfo" >
+          <CloseIcon onClick={this.toggle} className="iconCloseM" />
             <ModalHeader className="HeaderModal">
               <small>{this.state.dataRuta ? this.state.dataRuta[0].nombre : ""}</small>
             </ModalHeader>
@@ -178,8 +219,10 @@ methodLineEnd = (id) =>{
             google={this.props.google}
             zoom={15}
             center={this.state.markerParada ? this.state.markerParada : []}
-            //initialCenter={this.state.originLineOne ? this.state.originLineOne : []} 
             mapTypeControl={false}
+            zoomControl={false}
+            streetViewControl={true}
+            disableDefaultUI={true}
           >
             <Marker 
               position={this.state.originLineOne ? this.state.originLineOne : []} 
