@@ -195,7 +195,6 @@ methodLineEnd = (id) =>{
                     }   
                   </div>
                   <Botones className="containerB" />
-                  <br />
                 </Nav>
           </Modal>
 
