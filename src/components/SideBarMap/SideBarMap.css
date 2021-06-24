@@ -22,10 +22,9 @@
 .HeaderModal{
   margin: 0 !important;
   padding: 0 !important;
-  background-color: rgba(255, 255, 255, 0.555);  
+  background-color: #fac039 !important;  
 }
 .ModalInfo{
-  background-color: rgb(88, 87, 87);
   border-radius: 30%;
 }
 .smileEnru{
@@ -84,6 +83,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
+    bottom: 0;
   }
   .containerRutasSm{
     margin-top: 15%;
@@ -98,7 +99,7 @@
     background-color: rgba(255, 255, 255, 0.541);
     overflow-y: auto;
     border-radius: 3%;
-    margin-bottom: 15%;
+    margin-bottom: 20%;
   }
     .containerRutasSm::-webkit-scrollbar {
       width: 12px;
@@ -183,7 +184,7 @@
   .containerB{
     position: absolute;
     width: 100%;
-    top: 100%;
+    top: 102%;
     }
     .containerB2{
       visibility: hidden;
@@ -240,6 +241,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
   }
   .containerRutasSm{
     margin-top: 10%;
@@ -254,7 +256,7 @@
     background-color: rgba(255, 255, 255, 0.541);
     overflow-y: auto;
     border-radius: 3%;
-    margin-bottom: 30%;
+    margin-bottom: 10%;
   }
     .containerRutasSm::-webkit-scrollbar {
       width: 12px;

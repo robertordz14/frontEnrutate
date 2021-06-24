@@ -195,13 +195,14 @@ methodLineEnd = (id) =>{
                     }   
                   </div>
                   <Botones className="containerB" />
+                  <br />
                 </Nav>
           </Modal>
 
           <Modal isOpen={this.state.modalInfo} toggle={this.toggle} className="ModalInfo" >
           <CloseIcon onClick={this.toggle} className="iconCloseM" />
             <ModalHeader className="HeaderModal">
-              <small>{this.state.dataRuta ? this.state.dataRuta[0].nombre : ""}</small>
+              <small style={{marginLeft: '20px'}}><b>{this.state.dataRuta ? this.state.dataRuta[0].nombre : ""}</b></small>
             </ModalHeader>
             <ModalBody className="modalBody">
                 <p><b>Frecuencia: </b>{this.state.dataRuta ? this.state.dataRuta[0].frecuencia : ""}</p>
