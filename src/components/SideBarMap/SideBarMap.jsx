@@ -194,9 +194,7 @@ methodLineEnd = (id) =>{
                       : "El código QR escaneado es incorrecto"
                     }   
                   </div>
-                  <footer className="containerB">
-                    <Botones />
-                  </footer>
+                  <Botones className="containerB" />
                 </Nav>
           </Modal>
 
@@ -221,7 +219,6 @@ methodLineEnd = (id) =>{
             center={this.state.markerParada ? this.state.markerParada : []}
             mapTypeControl={false}
             zoomControl={false}
-            streetViewControl={true}
             disableDefaultUI={true}
           >
             <Marker 

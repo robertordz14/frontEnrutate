@@ -10,7 +10,7 @@
     margin: 0;
     animation-timing-function: ease;
     position: relative;
-    animation: timingChange 5s infinite;
+    animation: timingChange 4s infinite;
 }
 .containerBotones{
     display: inline-block;
@@ -87,6 +87,6 @@
         left: 0%;
     }
     to{
-        left: 80%;
+        left: 75%;
     }
 }
