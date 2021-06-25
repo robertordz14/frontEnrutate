@@ -1,15 +1,5 @@
-.btnInfo{
-  border-radius: 30%;
-  background-color: #f5c24be7;
-  border: rgb(124, 124, 124) .5px solid;
-}
-.btnInfo:hover{
-  border-radius: 30%;
-  background-color: #FAB719;
-  border: rgb(124, 124, 124) .5px solid;
-}
-.btnMoreInfo{
-  color:rgb(88, 87, 87);
+.btnRutas:hover{
+  background-color: #f7c247;
 }
 .iconCloseM{
   margin-left: 90%;
@@ -32,7 +22,6 @@
   height: 30px;
   margin-left: 40%;
 }
-
 /*  Smartphones Potrait*/
 @media only screen and (max-width: 699px) and (max-height: 1024px) and (orientation:portrait){ 
   .navNoSm{
@@ -45,10 +34,22 @@
     margin-top: 10%;
     padding-bottom: 5%;
     height: 50px;
-    border-radius: 20px;
     width: 90%;
     margin-left: 5%;
     margin-right: 5%;
+    border-radius: 5px;
+  }
+  .containerSymbols{
+    width: 180px;
+    position: absolute;
+    float: right;
+    top: 60%;
+    right: 0;
+    z-index: 100;
+  }
+  .containerSymbolsMobile{
+    visibility: hidden;
+    display: none;
   }
   .iconSideRoutes{
     position: fixed;
@@ -64,7 +65,6 @@
     margin-top: 0% !important;
     margin-bottom: 0% !important;
     margin-left: 0% !important;
-    border: none !important;
   }
   .ModalInfo{
     width: 70%;
@@ -211,18 +211,29 @@
     display: none;
     visibility: hidden;
   }
+  .containerSymbols{
+    visibility: hidden;
+    display: none;
+  }
+  .containerSymbolsMobile{
+    width: 280px;
+    position: absolute;
+    float: right;
+    background-color: rgba(255, 255, 255, 0.925);
+    border: none;
+    top: 0;
+    right: 0;
+    z-index: 100;
+  }
   .ModalInfo{
     width: 40%;
-    margin-top: 10%;
-    margin-right: 30%;
-    margin-left: 30%;
   }
   .Side{
     display: flex;
   }
   .Side>.nav{     
-      width: 32%;
-      height: 100vh;
+      width: 30%;
+      height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -231,19 +242,24 @@
       white-space: pre-line;
     }
     .containerRutas{
-      margin-top: 10%;
-      margin-bottom: 2%;
+      margin-top: 15%;
+      margin-bottom: 15%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 85%;
-      height: 60%;
+      width: 75%;
+      height: 200px;
       background-color: rgba(255, 255, 255, 0.541);
       overflow-y: auto;
       padding: 5%;
-      border-radius: 3%;
+      border-radius: 5%;
     }
-
+    .containerRutas>h6>b{
+      font-size: 0.8rem;
+    }
+    .containerRutas>button{
+      font-size: 0.9rem;
+    }
     .containerRutas::-webkit-scrollbar {
       width: 12px;
     }
@@ -252,7 +268,8 @@
         border-radius: 10px;
       }
     .containerMap > div{
-      width: 68% !important; 
+      width: 70% !important; 
+      height: 100%;
       position: static;
     }
     .wrap-collabsible {
@@ -320,18 +337,17 @@
       .collapsible-content p { 
           margin-bottom: 0; 
       }
+  
       .containerB{
-        position: absolute;
-        width: 90%;
-        margin-left: 5%;
-        margin-right: 5%;
-        top: 90%;
+        position: relative;
+        width: 100%;
+        top: 100%;
         }
         .containerB2{
           visibility: hidden;
           display: none;
           } 
-  }
+}
 /* Desktop */
 @media only screen and (min-width: 961px) and (orientation:landscape){
   .navSm{
@@ -349,6 +365,18 @@
   .containerRutasSm{
     display: none;
     visibility: hidden;
+  }
+  .containerSymbolsMobile{
+    display: none;
+    visibility: hidden;
+  }
+  .containerSymbols{
+    width: 200px;
+    position: absolute;
+    float: right;
+    top: 0;
+    right: 0;
+    z-index: 100;
   }
   .ModalInfo{
     width: 30%;
@@ -484,6 +512,18 @@
   .containerRutasSm{
     display: none;
     visibility: hidden;
+  }
+  .containerSymbols{
+    width: 180px;
+    position: absolute;
+    float: right;
+    top: 0;
+    right: 0;
+    z-index: 100;
+  }
+  .containerSymbolsMobile{
+    visibility: hidden;
+    display: none;
   }
   .ModalInfo{
     width: 40%;
@@ -621,6 +661,20 @@
   .containerRutasSm{
     display: none;
     visibility: hidden;
+  }
+  .containerSymbols{
+    visibility: hidden;
+    display: none;
+  }
+  .containerSymbolsMobile{
+    width: 280px;
+    position: absolute;
+    float: right;
+    background-color: rgba(255, 255, 255, 0.925);
+    border: none;
+    top: 45%;
+    right: 5%;
+    z-index: 100;
   }
   .ModalInfo{
     width: 40%;

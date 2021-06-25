@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Map, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react';
-import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import CloseIcon from '@material-ui/icons/Close';
 // import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import DehazeIcon from '@material-ui/icons/Dehaze';
@@ -12,12 +12,14 @@ import {Navbar, Nav } from 'reactstrap';
 
 import logoEnrutate from '../../assets/img/enrutate.png';
 import iconInicio from '../../assets/img/iconInicio.png';
-import iconLocation from '../../assets/img/iconLocation.png';
 import iconFin from '../../assets/img/iconFin.png';
+import iconLocation from '../../assets/img/iconLocation.png';
 import camionEnrutateLateral from '../../assets/img/enrutateCamionLateral.png';
 import smileEnrutate from '../../assets/img/smileEnrutate.png'
 
 import Botones from '../Botones/Botones';
+import Symbols from '../Symbols/Symbols';
+import SymbolsMobile from '../SymbolsMobile/SymbolsMobile'
 
 import 'react-sidebar-ui/dist/index.css';
 import './SideBarMap.css';
@@ -150,7 +152,7 @@ methodLineEnd = (id) =>{
                   this.state.routes.map((n) =>
                     <button
                       key={n.nombre}
-                      className="btn"
+                      className="btn btnRutas"
                       onClick={(e) => this.methodLineEnd(n.rutaID, e)}
                     >
                       {n.nombre+ '\n'}
@@ -172,7 +174,7 @@ methodLineEnd = (id) =>{
 
           <Modal isOpen={this.state.modalSide} toggle={this.toggleSide2} className="ModalSide" >
           {/* <ArrowForwardIosIcon onClick={this.toggleSide2} className="iconCloseM" /> */}
-                <Nav vertical className="navSmSide">
+                <div vertical className="navSmSide">
                   <Logo
                   image={logoEnrutate}
                   imageName='logo'
@@ -194,8 +196,10 @@ methodLineEnd = (id) =>{
                       : "El código QR escaneado es incorrecto"
                     }   
                   </div>
-                  <Botones className="containerB" />
-                </Nav>
+                  <ModalFooter className="containerB">
+                    <Botones /> 
+                  </ModalFooter>
+                </div>
           </Modal>
 
           <Modal isOpen={this.state.modalInfo} toggle={this.toggle} className="ModalInfo" >
@@ -212,11 +216,23 @@ methodLineEnd = (id) =>{
             </ModalBody>
           </Modal>
 
+          <div className="containerSymbols">
+            <Symbols
+            ruta={this.state.dataRuta ? this.state.dataRuta[0].nombre : ""}
+             />
+          </div>
+
+          <div className="containerSymbolsMobile">
+            <SymbolsMobile
+            ruta={this.state.dataRuta ? this.state.dataRuta[0].nombre : ""}
+             />
+          </div>
+
           <div className="containerMap">
           <Map
             google={this.props.google}
             zoom={15}
-            center={this.state.markerParada ? this.state.markerParada : []}
+            center={this.state.markerParada ? this.state.markerParada : { lat: 24.80738789239335, lng: -107.39039498091519}}
             mapTypeControl={false}
             zoomControl={false}
             disableDefaultUI={true}
@@ -242,13 +258,12 @@ methodLineEnd = (id) =>{
                 strokeOpacity: 2,
                 strokeWeight: 4,
                 fillOpacity: 10,
-                strokeColor:"#349dd9",
+                strokeColor:"#07BD07",
                 icons:[{
                   icon: {
                     path: this.props.google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
                   },
-                  //offset: this.state.icon,
-                  repeat: "200px",
+                  repeat: "25%",
                 }],
               }}
             />
@@ -262,14 +277,12 @@ methodLineEnd = (id) =>{
                 strokeOpacity: 2,
                 strokeWeight: 4,
                 fillOpacity: 10,
-                strokeColor:"green",
-                icon: 'M -2,-2 2,2 M 2,-2 -2,2',
-                repeat: "200px",
+                strokeColor:"#F54500",
                 icons:[{
                   icon: {
                     path: this.props.google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
                   },
-                  //offset: this.state.icon,
+                  repeat: "25%",
                 }]
               }}
             />
