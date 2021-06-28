@@ -204,10 +204,10 @@ export class SideBarMapRoutes extends Component {
               <small style={{marginLeft: '20px'}}><b>{this.state.dataRuta ? this.state.dataRuta[0].nombre : ""}</b></small>
             </ModalHeader>
             <ModalBody className="modalBody">
-                <p><b>Frecuencia: </b>{this.state.dataRuta ? this.state.dataRuta[0].frecuencia : ""} min</p>
+                <p><b>Frecuencia: </b>{this.state.dataRuta ? this.state.dataRuta[0].frecuencia : ""}</p>
                 <p><b>Inicio: </b>{this.state.dataRuta ? this.state.dataRuta[0].inicio : ""}</p>
                 <p><b>Fin: </b>{this.state.dataRuta ? this.state.dataRuta[0].fin : ""}</p>
-                <p><b>Duracion: </b>{this.state.dataRuta ? this.state.dataRuta[0].duracion : ""} min</p>
+                <p><b>Duracion: </b>{this.state.dataRuta ? this.state.dataRuta[0].duracion : ""}</p>
                 <img src={camionEnrutateLateral} alt="Enrutate" srcSet=""  className="camionEnru" />
             </ModalBody>
           </Modal>
