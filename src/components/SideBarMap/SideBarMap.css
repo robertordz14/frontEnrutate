@@ -107,14 +107,10 @@
         background-color: rgba(255, 255, 255, 0.534);
         border-radius: 10px;
       }
-      .containerMap{
-        width: 100%;
-        height: 100%;
-      }
       .containerMap > div{
-        width: 100% !important; 
-        height: 110% !important; 
-        position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: 0;
+        width: 70vw !important; 
+        height: 130vh !important; 
+        position: static;
       }
   .wrap-collabsible {
     margin: 1.2rem 0; 
