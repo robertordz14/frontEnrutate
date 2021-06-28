@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <div className="Sidebar">
         <Router>
-          <div>
+        <div>
             <Switch>                          
               <Route exact path="/maps/:id" render={({match}) => {
                 return <SideBarMapRoutes id={match.params.id} />

@@ -17,7 +17,7 @@ import iconLocation from '../../assets/img/iconLocation.png';
 import camionEnrutateLateral from '../../assets/img/enrutateCamionLateral.png';
 import smileEnrutate from '../../assets/img/smileEnrutate.png'
 
-import Botones from '../Botones/Botones';
+import Buttons from '../Buttons/Buttons';
 import Symbols from '../Symbols/Symbols';
 import SymbolsMobile from '../SymbolsMobile/SymbolsMobile'
 
@@ -61,14 +61,12 @@ export class SideBarMapRoutes extends Component {
   toggle = () => {
     this.setState({modalInfo:false})
   }
-
   toggleSide= () => {
     this.setState({modalSide:true})
   } 
   toggleSide2 = () => {
   this.setState({modalSide:false})
   } 
-
   componentDidMount = () => {
     this.methodGet();  
     this.paradaGet();
@@ -85,15 +83,13 @@ export class SideBarMapRoutes extends Component {
               });
           }
       }, 50);
-    };
-
+  };
   methodGet = () => {    
     const url = `https://enrutate2021.herokuapp.com/api/data/${this.state.busStop}`
     axios.get(url).then(response => {                        
       this.setState({ routes: response.data });   
     });    
   }
-
   paradaGet = () => {    
     const url = `https://enrutate2021.herokuapp.com/api/parada/${this.state.busStop}`
     axios.get(url).then(response => {      
@@ -110,9 +106,8 @@ export class SideBarMapRoutes extends Component {
         statusAnimation: true,
       });
     });                      
-}
-
-methodLineEnd = (id) =>{        
+  }
+  methodLineEnd = (id) =>{        
     this.setState({ rutaID: id});
     const url = `https://enrutate2021.herokuapp.com/api/lineTwo/${id}`;
     const url2 = `https://enrutate2021.herokuapp.com/api/modal/${id}`;
@@ -135,7 +130,7 @@ methodLineEnd = (id) =>{
       this.methodLineStart();    
       this.paradaGet(); 
     });
-}  
+  }  
 
   render() {
     return (
@@ -160,11 +155,12 @@ methodLineEnd = (id) =>{
                   )
                 : "El código QR escaneado es incorrecto"
               }   
-              
             </div>
-            <footer className="containerB">
-              <Botones />
-            </footer>
+
+            <div className="containerB">
+              <Buttons />
+            </div>
+
           </Nav>
 
           <Navbar color="faded" light className="navSm">
@@ -196,8 +192,8 @@ methodLineEnd = (id) =>{
                       : "El código QR escaneado es incorrecto"
                     }   
                   </div>
-                  <ModalFooter className="containerB">
-                    <Botones /> 
+                  <ModalFooter className="containerBM">
+                    <Buttons /> 
                   </ModalFooter>
                 </div>
           </Modal>
@@ -232,7 +228,7 @@ methodLineEnd = (id) =>{
           <Map
             google={this.props.google}
             zoom={15}
-            center={this.state.markerParada ? this.state.markerParada : { lat: 24.80738789239335, lng: -107.39039498091519}}
+            center={this.state.markerParada ? this.state.markerParada : []}
             mapTypeControl={false}
             zoomControl={false}
             disableDefaultUI={true}
@@ -289,9 +285,10 @@ methodLineEnd = (id) =>{
           </Map>
         </div>
         
-        <footer className="containerB2">
-              <Botones />
-        </footer>
+        <div className="containerB2">
+              <Buttons />
+        </div>
+     
       </div>
 
       );

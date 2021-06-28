@@ -15,7 +15,7 @@ const Symbols = (props) => {
           <ToastHeader style={{textAlign:'center'}}>
            {props.ruta}
           </ToastHeader>
-          <ToastBody>
+          <ToastBody style={{height:'135px'}}>
           <List type="unstyled">
               <li>
                   <img src={iconInicio} alt="" srcSet="" />

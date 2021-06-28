@@ -7,7 +7,7 @@ import iconLocation from '../../assets/img/iconLocation.png';
 
 const SymbolsMobile = (props) => {
   return (
-      <div className="alertsContainer ">
+      <div className="alertsContainer">
      <Alert  className="rounded containerSymbolsMobile">
         <img src={iconInicio} alt="" srcSet="" style={{marginRight: '3px'}} />
          <small style={{marginRight: '15px'}}><b>Inicio</b></small>

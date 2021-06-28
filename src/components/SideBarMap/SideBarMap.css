@@ -20,8 +20,11 @@
 .smileEnru{
   width: auto;
   height: 30px;
-  margin-left: 40%;
+  margin-right: 35%;
 }
+/* .btn{
+  white-space: pre-line;
+} */
 /*  Smartphones Potrait*/
 @media only screen and (max-width: 699px) and (max-height: 1024px) and (orientation:portrait){ 
   .navNoSm{
@@ -40,10 +43,10 @@
     border-radius: 5px;
   }
   .containerSymbols{
-    width: 180px;
+    width: 170px;
     position: absolute;
     float: right;
-    top: 60%;
+    top: 65%;
     right: 0;
     z-index: 100;
   }
@@ -52,8 +55,6 @@
     display: none;
   }
   .iconSideRoutes{
-    position: fixed;
-    cursor: pointer;
     margin-left: 8%;
     margin-top: 1%;
     margin-bottom: 1%;
@@ -71,9 +72,6 @@
     margin-top: 20%;
     margin-right: 15%;
     margin-left: 15%;
-  }
-  .btn{
-    white-space: pre-line;
   }
   .containerRutas{
     display: none;
@@ -94,13 +92,13 @@
     align-items: center;
     position: sticky;
     width: 80%;
-    height: 425px !important;
+    height: 420px !important;
     margin-right: 10%;
     margin-left: 10%;
     background-color: rgba(255, 255, 255, 0.541);
     overflow-y: auto;
     border-radius: 3%;
-    margin-bottom: 19%;
+    margin-bottom: 16%;
   }
     .containerRutasSm::-webkit-scrollbar {
       width: 12px;
@@ -115,7 +113,7 @@
       }
       .containerMap > div{
         width: 100% !important; 
-        height: 100% !important; 
+        height: 110% !important; 
         position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: 0;
       }
   .wrap-collabsible {
@@ -135,11 +133,9 @@
      border-radius: 7px; 
      transition: all 0.25s ease-out; 
    } 
-
     .lbl-toggle:hover { 
       color: #FFF; 
     } 
-
      .lbl-toggle::before { 
       content: ' '; 
       display: inline-block; 
@@ -151,43 +147,41 @@
       transform: translateY(-2px); 
       transition: transform .2s ease-out; 
       } 
-
   .toggle:checked+.lbl-toggle::before { 
       transform: rotate(90deg) translateX(-3px); 
   } 
-
   .collapsible-content { 
       max-height: 0px; 
       overflow: hidden; 
       transition: max-height .25s ease-in-out; 
   } 
-
   .toggle:checked + .lbl-toggle + .collapsible-content { 
       max-height: 100px; 
   } 
-
     .toggle:checked+.lbl-toggle { 
         border-bottom-right-radius: 0; 
         border-bottom-left-radius: 0; 
     } 
-
   .collapsible-content .content-inner { 
       background: rgba(0, 105, 255, .2); 
       border-bottom: 1px solid rgba(0, 105, 255, .45); 
       border-bottom-left-radius: 7px; 
       border-bottom-right-radius: 7px; 
       padding: .5rem 1rem; 
-  } 
-    
+  }  
     .collapsible-content p { 
         margin-bottom: 0; 
       }
   .containerB{
-    position: absolute;
-    width: 100%;
-    top: 106%;
-    border: none !important;
+    display: none;
+    visibility: hidden;
     }
+    .containerBM{
+      position: static;
+      width: 100%;
+      top: 100%;
+      border: none !important;
+      }
     .containerB2{
       visibility: hidden;
       display: none;
@@ -216,9 +210,10 @@
     display: none;
   }
   .containerSymbolsMobile{
-    width: 280px;
     position: absolute;
     float: right;
+    height: 64px;
+    width: 265px;
     background-color: rgba(255, 255, 255, 0.925);
     border: none;
     top: 0;
@@ -247,8 +242,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 75%;
-      height: 200px;
+      width: 80%;
+      height: 240px;
       background-color: rgba(255, 255, 255, 0.541);
       overflow-y: auto;
       padding: 5%;
@@ -267,15 +262,18 @@
         background-color: rgba(255, 255, 255, 0.534);
         border-radius: 10px;
       }
-    .containerMap > div{
-      width: 70% !important; 
-      height: 100%;
-      position: static;
-    }
+      .containerMap{
+        width: 70% !important; 
+        height: 100% !important;
+      }
+      .containerMap > div{
+        width: 70% !important; 
+        height: 120%  !important;
+        object-fit: fill;
+      }
     .wrap-collabsible {
       margin: 1.2rem 0; 
     } 
-
     .lbl-toggle {
        display: block; 
        font-weight: bold; 
@@ -290,11 +288,9 @@
        border-radius: 7px; 
        transition: all 0.25s ease-out; 
      } 
-  
       .lbl-toggle:hover { 
         color: #FFF; 
       } 
-  
        .lbl-toggle::before { 
         content: ' '; 
         display: inline-block; 
@@ -306,26 +302,21 @@
         transform: translateY(-2px); 
         transition: transform .2s ease-out; 
         } 
-  
     .toggle:checked+.lbl-toggle::before { 
         transform: rotate(90deg) translateX(-3px); 
     } 
-  
     .collapsible-content { 
         max-height: 0px; 
         overflow: hidden; 
         transition: max-height .25s ease-in-out; 
     } 
-  
     .toggle:checked + .lbl-toggle + .collapsible-content { 
         max-height: 100px; 
     } 
-  
       .toggle:checked+.lbl-toggle { 
           border-bottom-right-radius: 0; 
           border-bottom-left-radius: 0; 
       } 
-  
     .collapsible-content .content-inner { 
         background: rgba(0, 105, 255, .2); 
         border-bottom: 1px solid rgba(0, 105, 255, .45); 
@@ -333,15 +324,17 @@
         border-bottom-right-radius: 7px; 
         padding: .5rem 1rem; 
     } 
-      
       .collapsible-content p { 
           margin-bottom: 0; 
       }
-  
       .containerB{
         position: relative;
         width: 100%;
         top: 100%;
+        }
+        .containerBM{
+          visibility: hidden;
+          display: none;
         }
         .containerB2{
           visibility: hidden;
@@ -407,7 +400,6 @@
       padding: 5%;
       border-radius: 5%;
     }
-
     .containerRutas::-webkit-scrollbar {
       width: 12px;
     }
@@ -422,7 +414,6 @@
     .wrap-collabsible {
       margin: 1.2rem 0; 
     } 
-
     .lbl-toggle {
        display: block; 
        font-weight: bold; 
@@ -437,11 +428,9 @@
        border-radius: 7px; 
        transition: all 0.25s ease-out; 
      } 
-  
       .lbl-toggle:hover { 
         color: #FFF; 
       } 
-  
        .lbl-toggle::before { 
         content: ' '; 
         display: inline-block; 
@@ -453,26 +442,21 @@
         transform: translateY(-2px); 
         transition: transform .2s ease-out; 
         } 
-  
     .toggle:checked+.lbl-toggle::before { 
         transform: rotate(90deg) translateX(-3px); 
     } 
-  
     .collapsible-content { 
         max-height: 0px; 
         overflow: hidden; 
         transition: max-height .25s ease-in-out; 
     } 
-  
     .toggle:checked + .lbl-toggle + .collapsible-content { 
         max-height: 100px; 
     } 
-  
       .toggle:checked+.lbl-toggle { 
           border-bottom-right-radius: 0; 
           border-bottom-left-radius: 0; 
       } 
-  
     .collapsible-content .content-inner { 
         background: rgba(0, 105, 255, .2); 
         border-bottom: 1px solid rgba(0, 105, 255, .45); 
@@ -480,15 +464,17 @@
         border-bottom-right-radius: 7px; 
         padding: .5rem 1rem; 
     } 
-      
       .collapsible-content p { 
           margin-bottom: 0; 
       }
-  
       .containerB{
         position: absolute;
         width: 100%;
         top: 90%;
+        }
+        .containerBM{
+          visibility: hidden;
+          display: none;
         }
         .containerB2{
           visibility: hidden;
@@ -557,7 +543,6 @@
       padding: 5%;
       border-radius: 5%;
     }
-
     .containerRutas::-webkit-scrollbar {
       width: 12px;
     }
@@ -572,7 +557,6 @@
     .wrap-collabsible {
       margin: 1.2rem 0; 
     } 
-
     .lbl-toggle {
        display: block; 
        font-weight: bold; 
@@ -587,11 +571,9 @@
        border-radius: 7px; 
        transition: all 0.25s ease-out; 
      } 
-  
       .lbl-toggle:hover { 
         color: #FFF; 
       } 
-  
        .lbl-toggle::before { 
         content: ' '; 
         display: inline-block; 
@@ -603,26 +585,21 @@
         transform: translateY(-2px); 
         transition: transform .2s ease-out; 
         } 
-  
     .toggle:checked+.lbl-toggle::before { 
         transform: rotate(90deg) translateX(-3px); 
     } 
-  
     .collapsible-content { 
         max-height: 0px; 
         overflow: hidden; 
         transition: max-height .25s ease-in-out; 
     } 
-  
     .toggle:checked + .lbl-toggle + .collapsible-content { 
         max-height: 100px; 
     } 
-  
       .toggle:checked+.lbl-toggle { 
           border-bottom-right-radius: 0; 
           border-bottom-left-radius: 0; 
       } 
-  
     .collapsible-content .content-inner { 
         background: rgba(0, 105, 255, .2); 
         border-bottom: 1px solid rgba(0, 105, 255, .45); 
@@ -630,7 +607,6 @@
         border-bottom-right-radius: 7px; 
         padding: .5rem 1rem; 
     } 
-      
       .collapsible-content p { 
           margin-bottom: 0; 
       }
@@ -638,6 +614,10 @@
         position: absolute;
         width: 100%;
         top: 90%;
+        }
+        .containerBM{
+          visibility: hidden;
+          display: none;
         }
         .containerB2{
           visibility: hidden;
@@ -687,9 +667,6 @@
     display: flex;
     align-items: center;
   }
-  .btn{
-    white-space: pre-line;
-  }
   .containerRutas{
     margin-top: 40px;
     display: flex;
@@ -736,11 +713,9 @@
      border-radius: 7px; 
      transition: all 0.25s ease-out; 
    } 
-
     .lbl-toggle:hover { 
       color: #FFF; 
     } 
-
      .lbl-toggle::before { 
       content: ' '; 
       display: inline-block; 
@@ -752,26 +727,21 @@
       transform: translateY(-2px); 
       transition: transform .2s ease-out; 
       } 
-
   .toggle:checked+.lbl-toggle::before { 
       transform: rotate(90deg) translateX(-3px); 
   } 
-
   .collapsible-content { 
       max-height: 0px; 
       overflow: hidden; 
       transition: max-height .25s ease-in-out; 
   } 
-
   .toggle:checked + .lbl-toggle + .collapsible-content { 
       max-height: 100px; 
   } 
-
     .toggle:checked+.lbl-toggle { 
         border-bottom-right-radius: 0; 
         border-bottom-left-radius: 0; 
     } 
-
   .collapsible-content .content-inner { 
       background: rgba(0, 105, 255, .2); 
       border-bottom: 1px solid rgba(0, 105, 255, .45); 
@@ -779,7 +749,6 @@
       border-bottom-right-radius: 7px; 
       padding: .5rem 1rem; 
   } 
-    
     .collapsible-content p { 
         margin-bottom: 0; 
     }
@@ -787,6 +756,10 @@
       position: absolute;
       width: 100%;
       top: 95%;
+      }
+      .containerBM{
+        visibility: hidden;
+        display: none;
       }
       .containerB2{
         visibility: hidden;

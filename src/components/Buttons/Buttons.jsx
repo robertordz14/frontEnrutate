@@ -2,16 +2,16 @@ import React from "react";
 import imgCamion from '../../assets/img/enrutateCamion.png';
 import imgPlayStore from '../../assets/img/googlePlay.png';
 import imgAppleStore from '../../assets/img/appStore.png';
-import './Botones.css';
+import './Buttons.css';
 
-const Botones = () => {
+const Buttons = () => {
   // const [showSideBar, setSideBar] = useState(false);
 
   // const showSide = () =>
   // setSideBar(!showSideBar);
 
   return (
-      <div className="containerBotones">
+      <div className="containerButtons">
         <a href="https://www.enrutate.info/" target="_blank" rel="noreferrer" >
           <img src={imgCamion} alt="" className="camion" />
         </a>
@@ -26,4 +26,4 @@ const Botones = () => {
   
 };
 
-export default Botones;
+export default Buttons;
