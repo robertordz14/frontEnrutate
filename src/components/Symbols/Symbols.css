@@ -17,7 +17,7 @@ li>small{
         visibility: hidden;
     }
     .symbolsContainer{
-        height: 15vh !important;
+        height: auto !important;
         width: 85% !important;
     } 
     .symbolsContainer{
