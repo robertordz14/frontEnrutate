@@ -21,6 +21,7 @@
   height: 30px;
   margin-left: 38%;
   position: absolute;
+  margin-top: 1% !important;
 }
 /* .btn{
   white-space: pre-line;
