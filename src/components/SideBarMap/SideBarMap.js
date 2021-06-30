@@ -7,6 +7,7 @@ import DehazeIcon from '@material-ui/icons/Dehaze';
 
 /////////////////////////////////////
 import googleMapStyles from './GoogleMapStyles';
+import GoogleMapStylesNight from './GoogleMapStylesNight';
 /////////////////////////////////////
 
 import axios from "axios";
@@ -27,7 +28,6 @@ import SymbolsMobile from '../SymbolsMobile/SymbolsMobile'
 
 import 'react-sidebar-ui/dist/index.css';
 import './SideBarMap.css';
-
 
 export class SideBarMapRoutes extends Component {
   constructor(props) {
@@ -62,7 +62,6 @@ export class SideBarMapRoutes extends Component {
       routesExample: []
     }; 
   }
-
   toggle = () => {
     this.setState({modalInfo:false})
   }
@@ -137,8 +136,12 @@ export class SideBarMapRoutes extends Component {
       this.paradaGet(); 
     });
   }  
+ 
 
   render() {
+    var myDate = new Date();
+    var hora = myDate.getHours() + ':' + myDate.getMinutes();
+    console.log(hora);
     return (
       <div className="Side">
          <Nav vertical className="navNoSm">
@@ -239,8 +242,15 @@ export class SideBarMapRoutes extends Component {
             zoomControl={false}
             disableDefaultUI={true}
 
+            // if hora > 1 && hora < 7{
+            //     mapa noche
+            //   }else if hora > 19 {
+            //     mapa noche
+            //   } else {
+            //     mapa dia
+            //   }
             /////////////////////////////////////
-            styles={this.props.Style}
+            styles={myDate.getMinutes()>=50  && myDate.getMinutes()<=51 || myDate.getMinutes() >= 53 ?this.props.StyleNight : this.props.Style}
             /////////////////////////////////////
 
             >
@@ -308,6 +318,8 @@ export class SideBarMapRoutes extends Component {
 
 /////////////////////////////////////
 SideBarMapRoutes.defaultProps = googleMapStyles;
+SideBarMapRoutes.defaultProps = GoogleMapStylesNight;
+
 /////////////////////////////////////
 
 export default GoogleApiWrapper({
