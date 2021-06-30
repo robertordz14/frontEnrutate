@@ -256,14 +256,19 @@ export class SideBarMapRoutes extends Component {
             >
             <Marker 
               position={this.state.originLineOne ? this.state.originLineOne : []} 
+                            animation={window.google.maps.Animation.DROP}
+
               icon={iconInicio}
             />  
             <Marker 
               position={this.state.originLineTwo ? this.state.originLineTwo : []} 
+                            animation={window.google.maps.Animation.DROP}
+
               icon={iconFin} 
             />            
             <Marker 
               position={this.state.markerParada} 
+              animation={window.google.maps.Animation.DROP}
               icon={iconLocation} 
             />    
             <Polyline
