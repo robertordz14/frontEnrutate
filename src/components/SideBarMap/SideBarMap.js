@@ -234,7 +234,7 @@ export class SideBarMapRoutes extends Component {
           <Map
             google={this.props.google}
             zoom={15}
-            center={this.state.markerParada ? this.state.markerParada : []}
+            center={this.state.markerParada ? this.state.markerParada : {lat:24.806627861836812, lng:-107.39113741811012}}
             mapTypeControl={false}
             zoomControl={false}
             disableDefaultUI={true}
