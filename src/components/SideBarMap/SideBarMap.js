@@ -4,7 +4,6 @@ import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import CloseIcon from '@material-ui/icons/Close';
 
 import googleMapStylesStandar from './GoogleMapStylesStandar';
-import googleMapStylesNight from './GoogleMapStylesNight';
 
 import axios from "axios";
 
@@ -243,7 +242,7 @@ export class SideBarMapRoutes extends Component {
             //   } else {
             //     mapa dia
             //   }
-            styles={myDate.getHours() >= 1  && myDate.getHours() <= 7 || myDate.getHours() >= 19 ?this.props.StyleNight : this.props.Style}
+            styles={(myDate.getHours() >= 1  && myDate.getHours() <= 7) || myDate.getHours() >= 19 ? this.props.StyleNight : this.props.Style}
             >
             <Marker 
               position={this.state.originLineOne ? this.state.originLineOne : []} 
@@ -307,7 +306,7 @@ export class SideBarMapRoutes extends Component {
 }
 
 SideBarMapRoutes.defaultProps = googleMapStylesStandar;
-SideBarMapRoutes.defaultProps = googleMapStylesNight;
+
 
 export default GoogleApiWrapper({
   apiKey: ('AIzaSyAfb3MRYco1aN4yaJyXmK8jperHTMJl07E')
