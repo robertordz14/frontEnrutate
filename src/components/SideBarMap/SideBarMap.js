@@ -250,7 +250,7 @@ export class SideBarMapRoutes extends Component {
             //     mapa dia
             //   }
             /////////////////////////////////////
-            styles={myDate.getMinutes()>=50  && myDate.getMinutes()<=51 || myDate.getMinutes() >= 53 ?this.props.StyleNight : this.props.Style}
+            styles={myDate.getHours()>=1  && myDate.getHours()<=7 || myDate.getHours() >= 19 ?this.props.StyleNight : this.props.Style}
             /////////////////////////////////////
 
             >
