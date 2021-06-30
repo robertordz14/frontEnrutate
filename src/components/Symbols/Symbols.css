@@ -4,3 +4,49 @@ li{
 li>small{
     margin-left: 20px;
 }
+.line{
+   width: 20px !important;
+}
+.marker{
+    height: 25px !important;
+}
+/*  Smartphones Potrait*/
+@media only screen and (max-width: 699px) and (max-height: 1024px) and (orientation:portrait){ 
+    .listSymbols{
+        display: none;
+        visibility: hidden;
+    }
+    .symbolsContainer{
+        height: 15vh !important;
+        width: 85% !important;
+    } 
+    .symbolsContainer{
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+}
+/* Desktop */
+@media only screen and (min-width: 961px) and (orientation:landscape){
+   .symbolsMobileV{
+       visibility: hidden;
+       display: none;
+   }
+    .symbolsContainer{
+        height: 35vh !important;
+        width: auto !important;
+    } 
+    .listSymbols{
+        margin-left: 10%;
+    }
+}
+/* iPads Landscape*/
+@media only screen and (min-width: 768px) and (max-width:1024px) and (max-height:1024px)  and (min-height: 768px) and (orientation:landscape) {
+    .symbolsMobileV{
+        visibility: hidden;
+        display: none;
+    }
+    .symbolsContainer{
+        height: 25vh !important;
+        width: 140px !important;
+    } 
+}

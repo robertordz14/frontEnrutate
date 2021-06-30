@@ -2,10 +2,9 @@
   background-color: #f7c247;
 }
 .iconCloseM{
-  margin-left: 90%;
-  margin-top: 3%;
+  margin-left: 88%;
+  margin-top: 1% !important;
   margin-bottom: 1% !important;
-  padding-bottom: 1% !important;
   cursor: pointer;
   position: absolute;
 }
@@ -20,7 +19,8 @@
 .smileEnru{
   width: auto;
   height: 30px;
-  margin-right: 35%;
+  margin-left: 38%;
+  position: absolute;
 }
 /* .btn{
   white-space: pre-line;
@@ -43,11 +43,8 @@
     border-radius: 5px;
   }
   .containerSymbols{
-    width: 170px;
     position: absolute;
-    float: right;
-    top: 70%;
-    right: 0;
+    top: 80%;
     z-index: 100;
   }
   .containerSymbolsMobile{
@@ -55,12 +52,13 @@
     display: none;
   }
   .iconSideRoutes{
-    margin-left: 8%;
-    margin-top: 1%;
+    height: 45px;
+    margin-left: 5%;
+    margin-top: 2%;
     margin-bottom: 1%;
+    position: absolute;
   }
   .ModalSide{
-    background-color: #FAB719;
     width: 70vw;
     height: 100vh;
     margin-top: 0% !important;
@@ -78,11 +76,11 @@
     visibility: hidden;
   }
   .navSmSide{
+    height: 100vh;
     background-color: #FAB719;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 110%;
     border: none !important;
   }
   .containerRutasSm{
@@ -98,7 +96,7 @@
     background-color: rgba(255, 255, 255, 0.541);
     overflow-y: auto;
     border-radius: 3%;
-    margin-bottom: 20%;
+    margin-bottom: 15%;
   }
     .containerRutasSm::-webkit-scrollbar {
       width: 12px;
@@ -108,8 +106,14 @@
         border-radius: 10px;
       }
       .containerMap{
-        width: 100%;
-        height: 100%;
+        position: static;
+        margin-top: 0% !important;
+        margin-bottom: 0% !important;
+        margin-left: 0% !important;
+        margin-right: 0% !important;
+        z-index: 0;
+        width: 100% !important; 
+        height: 100% !important;
       }
       .containerMap > div{
         width: 100% !important; 
@@ -181,7 +185,6 @@
       width: 100%;
       top: 100vh;
       bottom: 0;
-      border: none !important;
       }
     .containerB2{
       visibility: hidden;
@@ -213,9 +216,6 @@
   .containerSymbolsMobile{
     position: absolute;
     float: right;
-    height: 64px;
-    width: 265px;
-    background-color: rgba(255, 255, 255, 0.925);
     border: none;
     top: 0;
     right: 0;
@@ -497,7 +497,6 @@
     visibility: hidden;
   }
   .containerSymbols{
-    width: 180px;
     position: absolute;
     float: right;
     top: 0;
@@ -644,10 +643,8 @@
     display: none;
   }
   .containerSymbolsMobile{
-    width: 280px;
     position: absolute;
     float: right;
-    background-color: rgba(255, 255, 255, 0.925);
     border: none;
     top: 45%;
     right: 5%;
@@ -689,7 +686,7 @@
   }
   .containerMap > div{
     width: 90% !important; 
-    height: 100% !important; 
+    height: 45% !important; 
     margin-right: 5%;
     margin-left: 5%;
   }

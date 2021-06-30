@@ -1,0 +1,24 @@
+.line{
+    width: 15px !important;
+ }
+ .marker{
+     height: 20px !important;
+ }
+ /*  Smartphones landscape*/
+ @media only screen and (min-width: 321px) and (max-width: 1024px) and (max-height: 699px) and (orientation:landscape){
+     .containerSymbolsM{
+        background-color: rgba(255, 255, 255, 0.925);
+        height: auto;
+        width: auto;
+        margin-bottom: 1% !important;
+     } 
+}
+/* iPads Potrait*/
+@media only screen and (min-width: 768px) and (max-width:1366px) and (max-height:1400px) and (min-height:1024px) and (orientation:portrait){
+    .containerSymbolsM{
+        background-color: rgba(255, 255, 255, 0.925);
+        height: auto;
+        width: auto;
+        margin-bottom: 1% !important;
+     } 
+}

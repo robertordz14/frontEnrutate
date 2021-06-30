@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import { Map, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react';
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import CloseIcon from '@material-ui/icons/Close';
-// import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import DehazeIcon from '@material-ui/icons/Dehaze';
 
-/////////////////////////////////////
-import googleMapStyles from './GoogleMapStyles';
-import GoogleMapStylesNight from './GoogleMapStylesNight';
-/////////////////////////////////////
+import googleMapStylesStandar from './GoogleMapStylesStandar';
+import googleMapStylesNight from './GoogleMapStylesNight';
 
 import axios from "axios";
 
@@ -21,6 +17,7 @@ import iconFin from '../../assets/img/iconFin.png';
 import iconLocation from '../../assets/img/iconLocation.png';
 import camionEnrutateLateral from '../../assets/img/enrutateCamionLateral.png';
 import smileEnrutate from '../../assets/img/smileEnrutate.png'
+import iconSideRutas from '../../assets/img/iconRutas.png';
 
 import Buttons from '../Buttons/Buttons';
 import Symbols from '../Symbols/Symbols';
@@ -28,6 +25,7 @@ import SymbolsMobile from '../SymbolsMobile/SymbolsMobile'
 
 import 'react-sidebar-ui/dist/index.css';
 import './SideBarMap.css';
+
 
 export class SideBarMapRoutes extends Component {
   constructor(props) {
@@ -136,12 +134,10 @@ export class SideBarMapRoutes extends Component {
       this.paradaGet(); 
     });
   }  
- 
 
   render() {
     var myDate = new Date();
-    var hora = myDate.getHours() + ':' + myDate.getMinutes();
-    console.log(hora);
+    // var hora = myDate.getHours() + ':' + myDate.getMinutes();
     return (
       <div className="Side">
          <Nav vertical className="navNoSm">
@@ -173,13 +169,12 @@ export class SideBarMapRoutes extends Component {
           </Nav>
 
           <Navbar color="faded" light className="navSm">
-          <DehazeIcon className="iconSideRoutes" onClick={this.toggleSide} />
+          <img src={iconSideRutas} alt="Rutas" srcSet="" className="iconSideRoutes" onClick={this.toggleSide}  />
            <img src={smileEnrutate} alt="Enrutate" srcSet=""  className="smileEnru" />
           </Navbar>
 
           <Modal isOpen={this.state.modalSide} toggle={this.toggleSide2} className="ModalSide" >
-          {/* <ArrowForwardIosIcon onClick={this.toggleSide2} className="iconCloseM" /> */}
-                <div vertical className="navSmSide">
+                <ModalBody className="navSmSide" style={{border: 'none'}}>
                   <Logo
                   image={logoEnrutate}
                   imageName='logo'
@@ -201,10 +196,10 @@ export class SideBarMapRoutes extends Component {
                       : "El código QR escaneado es incorrecto"
                     }   
                   </div>
-                  <ModalFooter className="containerBM">
+                    <div className="containerBM" >
                     <Buttons /> 
-                  </ModalFooter>
-                </div>
+                    </div>
+                </ModalBody>
           </Modal>
 
           <Modal isOpen={this.state.modalInfo} toggle={this.toggle} className="ModalInfo" >
@@ -237,38 +232,29 @@ export class SideBarMapRoutes extends Component {
           <Map
             google={this.props.google}
             zoom={15}
-            center={this.state.markerParada ? this.state.markerParada : {lat:24.806627861836812, lng:-107.39113741811012}}
+            center={this.state.markerParada ? this.state.markerParada : []}
             mapTypeControl={false}
             zoomControl={false}
             disableDefaultUI={true}
-
-            // if hora > 1 && hora < 7{
+             // if hora > 1 && hora < 7{
             //     mapa noche
             //   }else if hora > 19 {
             //     mapa noche
             //   } else {
             //     mapa dia
             //   }
-            /////////////////////////////////////
-            styles={myDate.getHours()>=1  && myDate.getHours()<=7 || myDate.getHours() >= 19 ?this.props.StyleNight : this.props.Style}
-            /////////////////////////////////////
-
+            styles={myDate.getHours() >= 1  && myDate.getHours() <= 7 || myDate.getHours() >= 19 ?this.props.StyleNight : this.props.Style}
             >
             <Marker 
               position={this.state.originLineOne ? this.state.originLineOne : []} 
-                            animation={window.google.maps.Animation.DROP}
-
               icon={iconInicio}
             />  
             <Marker 
               position={this.state.originLineTwo ? this.state.originLineTwo : []} 
-                            animation={window.google.maps.Animation.DROP}
-
               icon={iconFin} 
             />            
             <Marker 
               position={this.state.markerParada} 
-              animation={window.google.maps.Animation.DROP}
               icon={iconLocation} 
             />    
             <Polyline
@@ -316,16 +302,12 @@ export class SideBarMapRoutes extends Component {
         </div>
      
       </div>
-
       );
     }
 }
 
-/////////////////////////////////////
-SideBarMapRoutes.defaultProps = googleMapStyles;
-SideBarMapRoutes.defaultProps = GoogleMapStylesNight;
-
-/////////////////////////////////////
+SideBarMapRoutes.defaultProps = googleMapStylesStandar;
+SideBarMapRoutes.defaultProps = googleMapStylesNight;
 
 export default GoogleApiWrapper({
   apiKey: ('AIzaSyAfb3MRYco1aN4yaJyXmK8jperHTMJl07E')
