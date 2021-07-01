@@ -5,11 +5,6 @@ import imgAppleStore from '../../assets/img/appStore.png';
 import './Buttons.css';
 
 const Buttons = () => {
-  // const [showSideBar, setSideBar] = useState(false);
-
-  // const showSide = () =>
-  // setSideBar(!showSideBar);
-
   return (
       <div className="containerButtons">
         <a href="https://www.enrutate.info/" target="_blank" rel="noreferrer" >

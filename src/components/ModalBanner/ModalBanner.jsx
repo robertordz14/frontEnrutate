@@ -8,10 +8,8 @@ import imgAppleStore from '../../assets/img/appStore.png';
 import './ModalBanner.css';
 
 const ModalBanner = (props) => {
-
   const [modal, setModal] = useState(true);
   const toggle = () => setModal(!modal);
-
   return (
     <div>
       <Modal isOpen={modal} toggle={toggle} className="MadalBa">

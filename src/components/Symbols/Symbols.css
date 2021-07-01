@@ -21,8 +21,8 @@ li>small{
         width: 85% !important;
     } 
     .symbolsContainer{
-        margin-left: 10%;
-        margin-right: 10%;
+        margin-left: auto !important;
+        margin-right: auto !important;
     }
 }
 /* Desktop */

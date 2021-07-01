@@ -21,7 +21,7 @@
   height: 30px;
   margin-left: 38%;
   position: absolute;
-  margin-top: 1% !important;
+  margin-top: 3% !important;
 }
 /* .btn{
   white-space: pre-line;
@@ -35,7 +35,7 @@
   .Side>.navbar{
     z-index: 100;
     background-color: #ffffffe5;
-    margin-top: 10%;
+    margin-top: 5%;
     padding-bottom: 5%;
     height: 50px;
     width: 90%;
@@ -55,13 +55,13 @@
   .iconSideRoutes{
     height: 45px;
     margin-left: 5%;
-    margin-top: 2%;
+    margin-top: 4%;
     margin-bottom: 1%;
     position: absolute;
   }
   .ModalSide{
     width: 70vw;
-    height: 100vh;
+    height: 100%;
     margin-top: 0% !important;
     margin-bottom: 0% !important;
     margin-left: 0% !important;
@@ -184,8 +184,7 @@
     .containerBM{
       position: static;
       width: 100%;
-      top: 100vh;
-      bottom: 0;
+      top: 100%;
       }
     .containerB2{
       visibility: hidden;

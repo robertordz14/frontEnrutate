@@ -3,7 +3,7 @@ import { Map, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import CloseIcon from '@material-ui/icons/Close';
 
-import googleMapStylesStandar from './GoogleMapStylesStandar';
+import googleMapStyles from './GoogleMapStyles';
 
 import axios from "axios";
 
@@ -20,7 +20,7 @@ import iconSideRutas from '../../assets/img/iconRutas.png';
 
 import Buttons from '../Buttons/Buttons';
 import Symbols from '../Symbols/Symbols';
-import SymbolsMobile from '../SymbolsMobile/SymbolsMobile'
+import SymbolsMobile from '../SymbolsMobile/SymbolsMobile';
 
 import 'react-sidebar-ui/dist/index.css';
 import './SideBarMap.css';
@@ -69,7 +69,6 @@ export class SideBarMapRoutes extends Component {
   this.setState({modalSide:false})
   } 
   componentDidMount = () => {
-    console.log(this.props.mapStyle);
     this.methodGet();  
     this.paradaGet();
       this.methodGet(); 
@@ -242,7 +241,7 @@ export class SideBarMapRoutes extends Component {
             //   } else {
             //     mapa dia
             //   }
-            styles={(myDate.getHours() >= 0  && myDate.getHours() <= 7) || myDate.getHours() >= 19 ? this.props.StyleNight : this.props.Style}
+            styles={(myDate.getHours() >= 0  && myDate.getHours() <= 7) || myDate.getHours() >= 20 ? this.props.StyleNight : this.props.Style}
             >
             <Marker 
               position={this.state.originLineOne ? this.state.originLineOne : []} 
@@ -305,7 +304,7 @@ export class SideBarMapRoutes extends Component {
     }
 }
 
-SideBarMapRoutes.defaultProps = googleMapStylesStandar;
+SideBarMapRoutes.defaultProps = googleMapStyles;
 
 
 export default GoogleApiWrapper({
