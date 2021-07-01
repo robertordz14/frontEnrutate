@@ -21,7 +21,7 @@
   height: 30px;
   margin-left: 38%;
   position: absolute;
-  margin-top: 3% !important;
+  margin-top: 2% !important;
 }
 /* .btn{
   white-space: pre-line;
@@ -45,7 +45,7 @@
   }
   .containerSymbols{
     position: absolute;
-    top: 80%;
+    top: 76%;
     z-index: 100;
   }
   .containerSymbolsMobile{
@@ -55,7 +55,7 @@
   .iconSideRoutes{
     height: 45px;
     margin-left: 5%;
-    margin-top: 4%;
+    margin-top: 2%;
     margin-bottom: 1%;
     position: absolute;
   }
@@ -113,7 +113,7 @@
         margin-left: 0% !important;
         margin-right: 0% !important;
         z-index: 0;
-        width: 100% !important; 
+        width: 100vw !important; 
         height: 100% !important;
       }
       .containerMap > div{
@@ -184,7 +184,7 @@
     .containerBM{
       position: static;
       width: 100%;
-      top: 100%;
+      top: 90%;
       }
     .containerB2{
       visibility: hidden;

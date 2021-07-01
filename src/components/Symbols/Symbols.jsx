@@ -12,7 +12,7 @@ import './Symbols.css'
 
 const Symbols = (props) => {
     return (
-        <div className="p-3 my-2 rounded">
+        <div className="p-3 rounded">
         <Toast className="symbolsContainer">
           <ToastHeader style={{textAlign:'center'}}>
            {props.ruta}

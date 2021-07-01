@@ -241,7 +241,7 @@ export class SideBarMapRoutes extends Component {
             //   } else {
             //     mapa dia
             //   }
-            styles={(myDate.getHours() >= 0  && myDate.getHours() <= 7) || myDate.getHours() >= 20 ? this.props.StyleNight : this.props.Style}
+            styles={myDate.getHours() >= 0  && myDate.getHours() <= 7 || myDate.getHours() >= 20 ? this.props.StyleNight : this.props.Style}
             >
             <Marker 
               position={this.state.originLineOne ? this.state.originLineOne : []} 

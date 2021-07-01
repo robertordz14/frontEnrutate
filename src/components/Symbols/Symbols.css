@@ -21,6 +21,7 @@ li>small{
         width: 85% !important;
     } 
     .symbolsContainer{
+        flex-direction: column;
         margin-left: auto !important;
         margin-right: auto !important;
     }

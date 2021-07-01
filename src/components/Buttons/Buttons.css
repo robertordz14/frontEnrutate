@@ -1,14 +1,8 @@
 /*  Smartphones Potrait*/
 @media only screen and (max-width: 699px) and (max-height: 1024px) and (orientation:portrait){
     .containerButtons{
-        margin-top: 10%;
-        display: inline-block;
         flex-direction: column;
-        align-items: center;
         width: 100%;
-        position: relative;
-        margin: auto;
-        text-align: center;
     }
     .containerButtons>a{
         position: flex;
