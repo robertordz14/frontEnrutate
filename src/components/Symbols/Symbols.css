@@ -19,12 +19,8 @@ li>small{
     .symbolsContainer{
         height: auto !important;
         width: 85% !important;
+        float: right;
     } 
-    .symbolsContainer{
-        flex-direction: column;
-        margin-left: auto !important;
-        margin-right: auto !important;
-    }
 }
 /* Desktop */
 @media only screen and (min-width: 961px) and (orientation:landscape){
