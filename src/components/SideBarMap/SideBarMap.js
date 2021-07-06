@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Map, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react';
-import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, Navbar, Nav } from 'reactstrap';
 import CloseIcon from '@material-ui/icons/Close';
+import ZoomOutMapIcon from '@material-ui/icons/ZoomOutMap';
+import Fab from '@material-ui/core/Fab';
 
 import googleMapStyles from './GoogleMapStyles';
 
 import axios from "axios";
 
 import { Logo } from 'react-sidebar-ui';
-import {Navbar, Nav } from 'reactstrap';
 
 import logoEnrutate from '../../assets/img/enrutate.png';
 import iconInicio from '../../assets/img/iconInicio.png';
@@ -32,8 +33,10 @@ export class SideBarMapRoutes extends Component {
     this.state = { 
       modalInfo: false,
       modalSide: false,
-      progress: [],    
+      progress: [],  
+      bandera: false,  
       count: null,
+      zoom: 0,
       icon: "Mapa",
       markerParada:{},
       statusAnimation: false,                              
@@ -42,6 +45,8 @@ export class SideBarMapRoutes extends Component {
       polylineGreen: null,
       polylineOrange: null,
       routes: [],
+      rutaDefined: null,
+      rutaDefinedName: null,
       dataRuta: null,
       originLineOne: {},
       destinationLineOne: { lat: 21.884454222315508, lng: -102.3029899437197 },
@@ -88,8 +93,15 @@ export class SideBarMapRoutes extends Component {
   methodGet = () => {    
     const url = `https://enrutate2021.herokuapp.com/api/data/${this.state.busStop}`
     axios.get(url).then(response => {                        
-      this.setState({ routes: response.data });   
-    });    
+      this.setState({ 
+        routes: response.data,
+        rutaDefined: response.data[0].rutaID,
+        rutaDefinedName: response.data[0].nombre
+       });
+    });   
+    setTimeout(() =>{
+      this.methodDefault();
+    }, 1000)
   }
   paradaGet = () => {    
     const url = `https://enrutate2021.herokuapp.com/api/parada/${this.state.busStop}`
@@ -126,12 +138,53 @@ export class SideBarMapRoutes extends Component {
         count: 0,
         markerParada: this.state.markerParada,
         modalInfo: true,
-        modalSide: false
+        modalSide: false,
+        zoom: 15
       });
       this.methodLineStart();    
       this.paradaGet(); 
     });
   }  
+  methodDefault = () => {
+    const url = `https://enrutate2021.herokuapp.com/api/lineTwo/${this.state.rutaDefined}`;
+    axios.get(url).then(response => {              
+      var endPoint = response.data.length;          
+      this.setState({polylineOrange: response.data,
+        originLineTwo: response.data[0],
+        destinationLineTwo: response.data[endPoint],
+        statusAnimation: true,
+        count: 0,
+        markerParada: this.state.markerParada,
+        modalInfo: false,
+        modalSide: false
+      });
+    });
+    this.methodDefault2();
+  }
+  methodDefault2 = () => {
+    const url2 = `https://enrutate2021.herokuapp.com/api/lineOne/${this.state.rutaDefined}`;
+    axios.get(url2).then(response => {          
+      var endPoint = response.data.length;                           
+      this.setState({polylineGreen: response.data,
+        originLineOne: response.data[0],
+        destinationLineOne: response.data[endPoint],
+      });
+    }); 
+  }
+  buttonZoom = () => {
+    this.setState({
+      bandera: !this.state.bandera
+    })
+    if(this.state.bandera === true){
+      this.setState({
+        zoom: 15
+      })
+    }else{
+      this.setState({
+        zoom: 11
+      })
+    }
+  }
 
   render() {
     var myDate = new Date();
@@ -216,21 +269,19 @@ export class SideBarMapRoutes extends Component {
 
           <div className="containerSymbols">
             <Symbols
-            ruta={this.state.dataRuta ? this.state.dataRuta[0].nombre : ""}
+            ruta={this.state.dataRuta ? this.state.dataRuta[0].nombre : this.state.rutaDefinedName}
              />
           </div>
 
           <div className="containerSymbolsMobile">
-            <SymbolsMobile
-            ruta={this.state.dataRuta ? this.state.dataRuta[0].nombre : ""}
-             />
+            <SymbolsMobile />
           </div>
 
           <div className="containerMap">
           <Map
             google={this.props.google}
-            zoom={15}
-            center={this.state.markerParada ? this.state.markerParada : []}
+            zoom={this.state.zoom ? this.state.zoom : 15}
+            center={this.state.markerParada ? this.state.markerParada : [{lat:24.806627861836812, lng:-107.39113741811012}]}
             mapTypeControl={false}
             zoomControl={false}
             disableDefaultUI={true}
@@ -295,6 +346,10 @@ export class SideBarMapRoutes extends Component {
           </Map>
         </div>
         
+        <Fab color="secondary" size="small" onClick={this.buttonZoom} className="btnZoom">
+            <ZoomOutMapIcon />
+          </Fab>
+
         <div className="containerB2">
               <Buttons />
         </div>

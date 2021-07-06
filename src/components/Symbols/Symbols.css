@@ -18,9 +18,17 @@ li>small{
     }
     .symbolsContainer{
         height: auto !important;
-        width: 85% !important;
-        float: right;
+        width: 80% !important;
+        float: center;
+        margin-left: 10% !important;
+        margin-right: 10% !important;
     } 
+    .symbolsMobileV{text-align: center !important;}
+    .markerLocation{
+        text-decoration: none !important;
+        list-style: none !important;
+        text-align: center !important;
+    }
 }
 /* Desktop */
 @media only screen and (min-width: 961px) and (orientation:landscape){
@@ -29,6 +37,7 @@ li>small{
        display: none;
    }
     .symbolsContainer{
+        margin: 5%;
         height: 35vh !important;
         width: auto !important;
     } 

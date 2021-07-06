@@ -12,7 +12,7 @@ import './Symbols.css'
 
 const Symbols = (props) => {
     return (
-        <div className="p-3 rounded">
+        <div className="rounded">
         <Toast className="symbolsContainer">
           <ToastHeader style={{textAlign:'center'}}>
            {props.ruta}
@@ -52,10 +52,11 @@ const Symbols = (props) => {
             
             <img src={lineFin} alt="" srcSet="" style={{marginRight: '5px'}}  className="line"  />
             <small style={{marginRight: '15px'}}><b>Vuelta</b></small>         
-            
-            <img src={iconLocation} alt="" srcSet="" style={{marginLeft: '30%'}}  className="marker"  />
-            <small style={{marginLeft: '5px'}}><b>Ubicación</b></small>
             </div>         
+            <li className="markerLocation">
+                <img src={iconLocation} alt="" srcSet="" className="marker" />
+                <small><b>Ubicación</b></small>
+            </li> 
           </ToastBody>
         </Toast>
       </div>
