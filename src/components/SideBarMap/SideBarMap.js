@@ -322,7 +322,7 @@ export class SideBarMapRoutes extends Component {
                   icon: {
                     path: this.props.google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
                   },
-                  repeat: "25%",
+                  repeat: "40%",
                 }],
               }}
             />
@@ -341,7 +341,7 @@ export class SideBarMapRoutes extends Component {
                   icon: {
                     path: this.props.google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
                   },
-                  repeat: "25%",
+                  repeat: "40%",
                 }]
               }}
             />
