@@ -179,10 +179,12 @@ export class SideBarMapRoutes extends Component {
       this.setState({
         zoom: 15
       })
+      this.paradaGet();
     }else{
       this.setState({
-        zoom: 11
+        zoom: 12
       })
+      this.paradaGet();
     }
   }
 
@@ -281,7 +283,7 @@ export class SideBarMapRoutes extends Component {
           <Map
             google={this.props.google}
             zoom={this.state.zoom ? this.state.zoom : 15}
-            center={this.state.markerParada ? this.state.markerParada : [{lat:24.806627861836812, lng:-107.39113741811012}]}
+            center={this.state.markerParada ? this.state.markerParada : {lat:24.806627861836812, lng:-107.39113741811012}}
             mapTypeControl={false}
             zoomControl={false}
             disableDefaultUI={true}
