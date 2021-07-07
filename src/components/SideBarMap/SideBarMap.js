@@ -283,7 +283,7 @@ export class SideBarMapRoutes extends Component {
           <Map
             google={this.props.google}
             zoom={this.state.zoom ? this.state.zoom : 15}
-            center={this.state.markerParada ? this.state.markerParada : {lat:24.806627861836812, lng:-107.39113741811012}}
+            center={this.state.markerParada ? this.state.markerParada : [{lat:24.806627861836812, lng:-107.39113741811012}]}
             mapTypeControl={false}
             zoomControl={false}
             disableDefaultUI={true}
@@ -322,7 +322,7 @@ export class SideBarMapRoutes extends Component {
                   icon: {
                     path: this.props.google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
                   },
-                  repeat: "40%",
+                  repeat: "25%",
                 }],
               }}
             />
@@ -341,7 +341,7 @@ export class SideBarMapRoutes extends Component {
                   icon: {
                     path: this.props.google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
                   },
-                  repeat: "40%",
+                  repeat: "25%",
                 }]
               }}
             />
