@@ -59,7 +59,7 @@ const Symbols = (props) => {
             </li> 
           </ToastBody>
         </Toast>
-      </div>
+      </div> 
       );
 };
     

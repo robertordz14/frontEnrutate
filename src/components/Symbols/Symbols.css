@@ -36,6 +36,10 @@ li>small{
        visibility: hidden;
        display: none;
    }
+   .markerLocation{
+       visibility: hidden;
+       display: none;
+   }
     .symbolsContainer{
         margin: 5%;
         height: 35vh !important;

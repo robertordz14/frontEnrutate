@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
+import axios from "axios";
+
 import { Map, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react';
 import { Modal, ModalHeader, ModalBody, Navbar, Nav } from 'reactstrap';
+import { Logo } from 'react-sidebar-ui';
+
 import CloseIcon from '@material-ui/icons/Close';
 import ZoomOutMapIcon from '@material-ui/icons/ZoomOutMap';
 import Fab from '@material-ui/core/Fab';
 
 import googleMapStyles from './GoogleMapStyles';
-
-import axios from "axios";
-
-import { Logo } from 'react-sidebar-ui';
 
 import logoEnrutate from '../../assets/img/enrutate.png';
 import iconInicio from '../../assets/img/iconInicio.png';
@@ -25,7 +25,6 @@ import SymbolsMobile from '../SymbolsMobile/SymbolsMobile';
 
 import 'react-sidebar-ui/dist/index.css';
 import './SideBarMap.css';
-
 
 export class SideBarMapRoutes extends Component {
   constructor(props) {
@@ -76,19 +75,7 @@ export class SideBarMapRoutes extends Component {
   componentDidMount = () => {
     this.methodGet();  
     this.paradaGet();
-      this.methodGet(); 
-      setInterval(() => {            
-          if (this.state.count === 100) {                
-              this.setState({ 
-                  count: 0,                 
-              });        
-          }else{
-              this.setState({
-                  count: this.state.count + 0.5,
-                  icon: this.state.count + "%",
-              });
-          }
-      }, 50);
+    this.methodGet(); 
   };
   methodGet = () => {    
     const url = `https://enrutate2021.herokuapp.com/api/data/${this.state.busStop}`
@@ -101,7 +88,7 @@ export class SideBarMapRoutes extends Component {
     });   
     setTimeout(() =>{
       this.methodDefault();
-    }, 1000)
+    }, 500)
   }
   paradaGet = () => {    
     const url = `https://enrutate2021.herokuapp.com/api/parada/${this.state.busStop}`

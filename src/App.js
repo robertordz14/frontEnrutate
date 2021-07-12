@@ -1,6 +1,7 @@
 import './App.css';
 import SideBarMapRoutes from './components/SideBarMap/SideBarMap';
 import ModalBanner from './components/ModalBanner/ModalBanner';
+import QRScanner from './components/QRScanner/QRScanner';
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,9 +15,10 @@ function App() {
         <Router>
         <div>
             <Switch>                          
-              <Route exact path="/maps/:id" render={({match}) => {
+              <Route exact path="/:id" render={({match}) => {
                 return <SideBarMapRoutes id={match.params.id} />
-              }}/>                                    
+              }}/>          
+              <Route exact path="/" component={QRScanner} />                          
             </Switch>
           </div>
           <div className="Modal">
