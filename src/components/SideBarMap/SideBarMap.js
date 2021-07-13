@@ -34,9 +34,11 @@ export class SideBarMapRoutes extends Component {
       modalSide: false,
       progress: [],  
       bandera: false,  
-      count: null,
+      count: 0,
+      key: 1,
+      key2: 2,
       zoom: 0,
-      icon: "Mapa",
+      icon: "0%",
       markerParada:{},
       statusAnimation: false,                              
       busStop: Number.parseInt(this.props.id),
@@ -73,6 +75,20 @@ export class SideBarMapRoutes extends Component {
   this.setState({modalSide:false})
   } 
   componentDidMount = () => {
+    setInterval(() => {
+      if(this.state.count === 100){
+        this.setState({
+          count: 0
+        })
+      }else{
+        this.setState({
+          count: this.state.count + 0.5,
+          icon: this.state.count + "%",
+          key: Math.random(),
+          key2: Math.random()
+        })
+      }
+    }, 50)
     this.methodGet();  
     this.paradaGet();
     this.methodGet(); 
@@ -296,10 +312,12 @@ export class SideBarMapRoutes extends Component {
               icon={iconLocation} 
             />    
             <Polyline
+              key={this.state.key}
               geodesic={true}
               path={
                 this.state.polylineGreen ? this.state.polylineGreen : []
               }              
+              interval={10}       
               options={{
                 strokeOpacity: 2,
                 strokeWeight: 4,
@@ -309,12 +327,13 @@ export class SideBarMapRoutes extends Component {
                   icon: {
                     path: this.props.google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
                   },
-                  repeat: "25%",
+                  offset: this.state.icon
                 }],
               }}
             />
             <Polyline
-            geodesic={true}     
+              geodesic={true}  
+              key={this.state.key2}   
               path={
                 this.state.polylineOrange ? this.state.polylineOrange : []
               }  
@@ -328,7 +347,7 @@ export class SideBarMapRoutes extends Component {
                   icon: {
                     path: this.props.google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
                   },
-                  repeat: "25%",
+                  offset: this.state.icon
                 }]
               }}
             />
