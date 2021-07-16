@@ -72,9 +72,12 @@ export class SideBarMapRoutes extends Component {
     this.setState({modalSide:true})
   } 
   toggleSide2 = () => {
-  this.setState({modalSide:false})
+    this.setState({modalSide:false})
   } 
   componentDidMount = () => {
+    this.methodGet();  
+    this.paradaGet();
+
     setInterval(() => {
       if(this.state.count === 100){
         this.setState({
@@ -89,9 +92,6 @@ export class SideBarMapRoutes extends Component {
         })
       }
     }, 50)
-    this.methodGet();  
-    this.paradaGet();
-    this.methodGet(); 
   };
   methodGet = () => {    
     const url = `https://enrutate2021.herokuapp.com/api/data/${this.state.busStop}`
@@ -319,9 +319,6 @@ export class SideBarMapRoutes extends Component {
               }              
               interval={10}       
               options={{
-                strokeOpacity: 2,
-                strokeWeight: 4,
-                fillOpacity: 10,
                 strokeColor:"#07BD07",
                 icons:[{
                   icon: {
@@ -339,9 +336,6 @@ export class SideBarMapRoutes extends Component {
               }  
               interval={10}       
               options={{
-                strokeOpacity: 2,
-                strokeWeight: 4,
-                fillOpacity: 10,
                 strokeColor:"#F54500",
                 icons:[{
                   icon: {
