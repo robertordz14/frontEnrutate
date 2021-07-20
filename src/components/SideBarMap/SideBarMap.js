@@ -98,8 +98,8 @@ export class SideBarMapRoutes extends Component {
     axios.get(url).then(response => {                        
       this.setState({ 
         routes: response.data,
-        rutaDefined: response.data[0].rutaID,
-        rutaDefinedName: response.data[0].nombre
+        rutaDefined: response.data.length > 0 ? response.data[0].rutaID : "",
+        rutaDefinedName: response.data.length > 0 ? response.data[0].nombre : ""
        });
     });   
     setTimeout(() =>{
@@ -286,7 +286,7 @@ export class SideBarMapRoutes extends Component {
           <Map
             google={this.props.google}
             zoom={this.state.zoom ? this.state.zoom : 15}
-            center={this.state.markerParada ? this.state.markerParada : [{lat:24.806627861836812, lng:-107.39113741811012}]}
+            center={this.state.markerParada ? this.state.markerParada : {lat:24.806627861836812, lng:-107.39113741811012}}
             mapTypeControl={false}
             zoomControl={false}
             disableDefaultUI={true}
@@ -297,7 +297,7 @@ export class SideBarMapRoutes extends Component {
             //   } else {
             //     mapa dia
             //   }
-            styles={myDate.getHours() >= 0  && myDate.getHours() <= 7 || myDate.getHours() >= 20 ? this.props.StyleNight : this.props.Style}
+            styles={(myDate.getHours() >= 0  && myDate.getHours() <= 7) || myDate.getHours() >= 20 ? this.props.StyleNight : this.props.Style}
             >
             <Marker 
               position={this.state.originLineOne ? this.state.originLineOne : []} 
