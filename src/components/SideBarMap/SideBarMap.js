@@ -8,6 +8,7 @@ import { Logo } from 'react-sidebar-ui';
 import CloseIcon from '@material-ui/icons/Close';
 import ZoomOutMapIcon from '@material-ui/icons/ZoomOutMap';
 import Fab from '@material-ui/core/Fab';
+import Brightness6Icon from '@material-ui/icons/Brightness6';
 
 import googleMapStyles from './GoogleMapStyles';
 
@@ -32,11 +33,16 @@ export class SideBarMapRoutes extends Component {
     this.state = { 
       modalInfo: false,
       modalSide: false,
+      change: false,
       progress: [],  
       bandera: false,  
       count: 0,
       key: 1,
       key2: 2,
+      map: 3,
+      marker1: 4,
+      marker2: 5,
+      marker3: 6,
       zoom: 0,
       icon: "0%",
       markerParada:{},
@@ -45,6 +51,7 @@ export class SideBarMapRoutes extends Component {
       rutaID: null,
       polylineGreen: null,
       polylineOrange: null,
+      style: this.props.Style,
       routes: [],
       rutaDefined: null,
       rutaDefinedName: null,
@@ -75,7 +82,7 @@ export class SideBarMapRoutes extends Component {
     this.setState({modalSide:false})
   } 
   componentDidMount = () => {
-    this.methodGet();  
+    this.methodGet();
     this.paradaGet();
 
     setInterval(() => {
@@ -91,7 +98,7 @@ export class SideBarMapRoutes extends Component {
           key2: Math.random()
         })
       }
-    }, 50)
+    }, 50);
   };
   methodGet = () => {    
     const url = `https://enrutate2021.herokuapp.com/api/data/${this.state.busStop}`
@@ -99,21 +106,24 @@ export class SideBarMapRoutes extends Component {
       this.setState({ 
         routes: response.data,
         rutaDefined: response.data.length > 0 ? response.data[0].rutaID : "",
-        rutaDefinedName: response.data.length > 0 ? response.data[0].nombre : ""
+        rutaDefinedName: response.data.length > 0 ? response.data[0].nombre : "",        
        });
-    });   
-    setTimeout(() =>{
-      this.methodDefault();
-    }, 500)
+    });     
+    this.funcion();   
+  }
+  funcion = () => {
+    setTimeout(() =>{      
+      this.methodDefault();      
+    }, 1000)
   }
   paradaGet = () => {    
     const url = `https://enrutate2021.herokuapp.com/api/parada/${this.state.busStop}`
     axios.get(url).then(response => {      
-      this.setState({markerParada: response.data[0] });        
+      this.setState({markerParada: response.data[0]});        
     });    
   }
   methodLineStart = () =>{        
-    const url = `https://enrutate2021.herokuapp.com/api/lineOne/${this.state.rutaID}`;
+    const url = `https://enrutate2021.herokuapp.com/api/lineOne/${this.state.rutaID ? this.state.rutaID : this.state.rutaDefined}`;
     axios.get(url).then(response => {          
       var endPoint = response.data.length;                           
       this.setState({polylineGreen: response.data,
@@ -147,12 +157,38 @@ export class SideBarMapRoutes extends Component {
       this.methodLineStart();    
       this.paradaGet(); 
     });
+  }
+
+  methodLineChange = (id) =>{        
+    this.setState({ rutaID: id});
+    const url = `https://enrutate2021.herokuapp.com/api/lineTwo/${id ? id : this.state.rutaDefined}`;
+    const url2 = `https://enrutate2021.herokuapp.com/api/modal/${id ? id : this.state.rutaDefined}`;
+    axios.get(url2).then(response => {
+      this.setState({
+        dataRuta: response.data
+      })
+    });
+    axios.get(url).then(response => {              
+      var endPoint = response.data.length;          
+      this.setState({polylineOrange: response.data,
+        originLineTwo: response.data[0],
+        destinationLineTwo: response.data[endPoint],
+        statusAnimation: true,
+        count: 0,
+        markerParada: this.state.markerParada,
+        modalInfo: false,
+        modalSide: false,        
+      });
+      this.methodLineStart();    
+      this.paradaGet(); 
+    });
   }  
   methodDefault = () => {
     const url = `https://enrutate2021.herokuapp.com/api/lineTwo/${this.state.rutaDefined}`;
     axios.get(url).then(response => {              
       var endPoint = response.data.length;          
-      this.setState({polylineOrange: response.data,
+      this.setState({
+        polylineOrange: response.data,
         originLineTwo: response.data[0],
         destinationLineTwo: response.data[endPoint],
         statusAnimation: true,
@@ -168,11 +204,32 @@ export class SideBarMapRoutes extends Component {
     const url2 = `https://enrutate2021.herokuapp.com/api/lineOne/${this.state.rutaDefined}`;
     axios.get(url2).then(response => {          
       var endPoint = response.data.length;                           
-      this.setState({polylineGreen: response.data,
+      this.setState({
+        polylineGreen: response.data,
         originLineOne: response.data[0],
         destinationLineOne: response.data[endPoint],
       });
     }); 
+  }
+  switchStyleMap = () =>{   
+    this.setState({
+      modalInfo: false,
+      modalSide: false
+    });      
+    if(this.state.change === false){
+      this.setState({
+        style: this.props.StyleNight,
+        map: Math.random(),        
+        change: true
+      })                  
+    }else{      
+      this.setState({
+        style: this.props.Style,
+        map: Math.random(),        
+        change: false
+      })            
+    }  
+    this.methodLineChange(this.state.rutaID);        
   }
   buttonZoom = () => {
     this.setState({
@@ -188,11 +245,10 @@ export class SideBarMapRoutes extends Component {
         zoom: 12
       })
       this.paradaGet();
-    }
+    }    
   }
 
-  render() {
-    var myDate = new Date();
+  render() {    
     // var hora = myDate.getHours() + ':' + myDate.getMinutes();
     return (
       <div className="Side">
@@ -225,8 +281,8 @@ export class SideBarMapRoutes extends Component {
           </Nav>
 
           <Navbar color="faded" light className="navSm">
-          <img src={iconSideRutas} alt="Rutas" srcSet="" className="iconSideRoutes" onClick={this.toggleSide}  />
-           <img src={smileEnrutate} alt="Enrutate" srcSet=""  className="smileEnru" />
+            <img src={iconSideRutas} alt="Rutas" srcSet="" className="iconSideRoutes" onClick={this.toggleSide}  />
+            <img src={smileEnrutate} alt="Enrutate" srcSet=""  className="smileEnru" />
           </Navbar>
 
           <Modal isOpen={this.state.modalSide} toggle={this.toggleSide2} className="ModalSide" >
@@ -284,31 +340,28 @@ export class SideBarMapRoutes extends Component {
 
           <div className="containerMap">
           <Map
+            key={this.state.map}
             google={this.props.google}
             zoom={this.state.zoom ? this.state.zoom : 15}
             center={this.state.markerParada ? this.state.markerParada : {lat:24.806627861836812, lng:-107.39113741811012}}
             mapTypeControl={false}
             zoomControl={false}
-            disableDefaultUI={true}
-             // if hora > 1 && hora < 7{
-            //     mapa noche
-            //   }else if hora > 19 {
-            //     mapa noche
-            //   } else {
-            //     mapa dia
-            //   }
-            styles={(myDate.getHours() >= 0  && myDate.getHours() <= 7) || myDate.getHours() >= 20 ? this.props.StyleNight : this.props.Style}
-            >
-            <Marker 
-              position={this.state.originLineOne ? this.state.originLineOne : []} 
+            disableDefaultUI={true}            
+            styles={this.state.style}            
+          >            
+            <Marker
+              key={this.state.marker1}               
+              position={this.state.originLineOne ? this.state.originLineOne : {}} 
               icon={iconInicio}
             />  
-            <Marker 
-              position={this.state.originLineTwo ? this.state.originLineTwo : []} 
+            <Marker
+              key={this.state.marker2}           
+              position={this.state.originLineTwo ? this.state.originLineTwo : {}} 
               icon={iconFin} 
             />            
-            <Marker 
-              position={this.state.markerParada} 
+            <Marker
+              key={this.state.marker3}               
+              position={this.state.markerParada ? this.state.markerParada : {}} 
               icon={iconLocation} 
             />    
             <Polyline
@@ -351,6 +404,14 @@ export class SideBarMapRoutes extends Component {
         <Fab color="secondary" size="small" onClick={this.buttonZoom} className="btnZoom">
             <ZoomOutMapIcon />
           </Fab>
+
+            {
+                this.state.routes[0] ?
+                <Fab color="default" size="small" onClick={this.switchStyleMap} className="btnBright">
+                  <Brightness6Icon />
+                </Fab>
+                : null
+              }
 
         <div className="containerB2">
               <Buttons />
